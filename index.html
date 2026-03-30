@@ -6,6 +6,7 @@
 <title>Moment Troc – Outil sécurisé</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ========== STYLES COMPLETS (inchangés) ========== */
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --bg:#F5F4EF;--card:#FFF;--dark:#1C1C1C;--mid:#555;--muted:#AAA;--border:#E8E6DF;--soft:#F0EEE8;
@@ -178,7 +179,7 @@ function initOutil(isProspectMode) {
           <button class="ebtn" onclick="sauvegarder()">Sauvegarder et obtenir mon lien →</button>
           <div class="lbox" id="lbox"><div class="llbl">🔗 Ton lien prospect — prêt à partager</div><div class="lval" id="lval"></div><button class="lcopy" id="lcbtn" onclick="copierLien()">Copier le lien</button><div class="lnote">Mets ce lien dans tes commentaires, ta bio, ton tunnel de vente.<br>Le prospect clique → répond aux questions → tu reçois son profil par email.</div></div>
         </div>
-        <div id="tleads" style="display:none;"><div class="estats" id="estats"></div><div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button class="eexp" onclick="exportCSV()">↓ Exporter CSV</button></div><div class="etw"> <table> <thead> <tr><th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Pays</th><th>Date</th></tr> </thead> <tbody id="etbody"></tbody> </table> </div></div>
+        <div id="tleads" style="display:none;"><div class="estats" id="estats"></div><div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button class="eexp" onclick="exportCSV()">↓ Exporter CSV</button></div><div class="etw"> <table> <thead> <tr><th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Pays</th><th>Date</th> </tr> </thead> <tbody id="etbody"></tbody> </table> </div></div>
       </div>
     </div>
     <div id="vue-p" style="display:${isProspectMode ? 'flex' : 'none'}">
@@ -294,6 +295,25 @@ function initOutil(isProspectMode) {
     }
     function pNext() { if(!pReponses[pCurrent]) return; if(pCurrent+1 < pTotal) { pCurrent++; chargerQuestion(); } else { pAfficher('email'); } }
     function pPrev() { if(pCurrent > 0) { pCurrent--; chargerQuestion(); } else { pAfficher('intro'); } }
+    
+    // Détection du pays via l'IP
+    async function getCountryFromIP() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        return data.country_name || 'Inconnu';
+      } catch (error) {
+        console.error('Erreur géolocalisation IP:', error);
+        return 'Inconnu';
+      }
+    }
+    
+    function extraireChampsSpeciaux() {
+      let mefiance = "Non renseigné";
+      if(pReponses[2]) mefiance = pReponses[2];
+      return { mefiance };
+    }
+    
     function calculerProfil() {
       let scores = { auto:0, optiV:0, optiP:0, elev:0, lib:0, prot:0 };
       for(let i=0;i<pTotal;i++) {
@@ -304,27 +324,43 @@ function initOutil(isProspectMode) {
         if(opt && opt.s) for(let [k,v] of Object.entries(opt.s)) scores[k] = (scores[k]||0)+v;
       }
       let dominant = Object.keys(scores).reduce((a,b)=> scores[a] > scores[b] ? a : b);
-      let libelles = { auto:"Stratège structuré", optiV:"Optimiseur de résultats", optiP:"Chasseur d’opportunités", elev:"Visionnaire", lib:"Chercheur d’authenticité", prot:"Prudent méthodique" };
+      // NOUVEAUX NOMS DE PROFILS
+      let libelles = {
+        auto: "automatiseur",
+        optiV: "optimiseur valeur",
+        optiP: "optimiseur prix",
+        elev: "élévateur",
+        lib: "libérateur",
+        prot: "protecteur"
+      };
       return { profil: libelles[dominant] || dominant, scores };
     }
-    function pSoumettre(event) {
+    
+    async function pSoumettre(event) {
       if(event) event.preventDefault();
       let prenom = document.getElementById('pprenom').value.trim();
       let email = document.getElementById('pemail').value.trim();
       if(!prenom || !email) { alert('Merci de remplir tous les champs'); return; }
+      
       let { profil } = calculerProfil();
-      let mefiance = pReponses[2] || 'Non renseigné';
-      let pays = pReponses[3] || 'Non renseigné';
-      let leadData = { prenom, email, profil, mefiance, pays, toutes_reponses: JSON.stringify(pReponses), timestamp: new Date().toISOString() };
+      let { mefiance } = extraireChampsSpeciaux();
+      let pays = await getCountryFromIP();
+      
+      let leadData = { 
+        prenom, email, profil, mefiance, pays,
+        toutes_reponses: JSON.stringify(pReponses), 
+        timestamp: new Date().toISOString() 
+      };
+      
       fetch(FORMSPREE_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(leadData) }).catch(e=>console.log(e));
       let leads = JSON.parse(localStorage.getItem('leads')||'[]');
       leads.push(leadData);
       localStorage.setItem('leads', JSON.stringify(leads));
       let lien = localStorage.getItem('leadMagnetUrl') || '#';
       document.getElementById('pclien').href = lien;
-      // Forcer l'affichage de la confirmation
       pAfficher('confirm');
     }
+    
     function eTab(tab, btn) {
       document.querySelectorAll('.etab').forEach(b=>b.classList.remove('on'));
       btn.classList.add('on');
