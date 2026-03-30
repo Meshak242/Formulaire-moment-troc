@@ -6,7 +6,6 @@
 <title>Moment Troc – Outil sécurisé</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ========== STYLES COMPLETS (inchangés) ========== */
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --bg:#F5F4EF;--card:#FFF;--dark:#1C1C1C;--mid:#555;--muted:#AAA;--border:#E8E6DF;--soft:#F0EEE8;
@@ -192,7 +191,7 @@ function initOutil(isProspectMode) {
           <div class="pqblock"><div class="pqmeta"><div class="pqnum" id="pqnum"></div><div class="pqdots" id="pqdots"></div></div><div class="pqtxt" id="pqtxt"></div><div class="popts" id="popts"></div><div class="pnav"><button class="pbk" onclick="pPrev()">← Retour</button><button class="pnx" id="pnx" onclick="pNext()">Suivant →</button></div></div>
         </div>
         <div class="pscreen" id="psemail">
-          <div class="peblock"><div class="peico">✉️</div><div class="petitle">Dernière étape.</div><p class="pesub" id="pesub">Entre ton prénom et ton email pour recevoir ton accès immédiatement.</p><input type="text" class="pfield" id="pprenom" placeholder="Ton prénom"/><input type="email" class="pfield" id="pemail" placeholder="Ton adresse email"/><button class="pbtn" onclick="pSoumettre()">Recevoir l'accès →</button><p class="pprv">Pas de spam. Juste ton accès.</p></div>
+          <div class="peblock"><div class="peico">✉️</div><div class="petitle">Dernière étape.</div><p class="pesub" id="pesub">Entre ton prénom et ton email pour recevoir ton accès immédiatement.</p><input type="text" class="pfield" id="pprenom" placeholder="Ton prénom"/><input type="email" class="pfield" id="pemail" placeholder="Ton adresse email"/><button class="pbtn" id="btnSubmit" onclick="pSoumettre(event)">Recevoir l'accès →</button><p class="pprv">Pas de spam. Juste ton accès.</p></div>
         </div>
         <div class="pscreen" id="psconfirm">
           <div class="pconfirm"><div class="pcico">🎉</div><div class="pctitle" id="pctitle">Félicitations !</div><p class="pcsub" id="pcsub">Ton accès est prêt.</p><a class="pcbtn" id="pclien" href="#" target="_blank">Accéder maintenant →</a><p class="pcnote">Vérifie aussi tes emails si tu ne trouves pas l'accès.</p></div>
@@ -265,12 +264,10 @@ function initOutil(isProspectMode) {
       let html = '';
       q.opts.forEach((opt, idx) => {
         let selected = (pReponses[pCurrent] === opt.t) ? 'on' : '';
-        // Échappement simple des guillemets dans le texte de l'option
         let safeText = opt.t.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         html += '<div class="popt '+selected+'" data-value="'+safeText+'"><div class="popto"></div><div class="poptt">'+opt.t+'</div></div>';
       });
       document.getElementById('popts').innerHTML = html;
-      // Attacher les événements après avoir injecté le HTML
       document.querySelectorAll('.popt').forEach(el => {
         el.addEventListener('click', function() {
           let val = this.getAttribute('data-value');
@@ -310,7 +307,8 @@ function initOutil(isProspectMode) {
       let libelles = { auto:"Stratège structuré", optiV:"Optimiseur de résultats", optiP:"Chasseur d’opportunités", elev:"Visionnaire", lib:"Chercheur d’authenticité", prot:"Prudent méthodique" };
       return { profil: libelles[dominant] || dominant, scores };
     }
-    function pSoumettre() {
+    function pSoumettre(event) {
+      if(event) event.preventDefault();
       let prenom = document.getElementById('pprenom').value.trim();
       let email = document.getElementById('pemail').value.trim();
       if(!prenom || !email) { alert('Merci de remplir tous les champs'); return; }
@@ -324,6 +322,7 @@ function initOutil(isProspectMode) {
       localStorage.setItem('leads', JSON.stringify(leads));
       let lien = localStorage.getItem('leadMagnetUrl') || '#';
       document.getElementById('pclien').href = lien;
+      // Forcer l'affichage de la confirmation
       pAfficher('confirm');
     }
     function eTab(tab, btn) {
