@@ -19,28 +19,28 @@
   --atext:#EDEAEA;--atext2:#8A8898;--atext3:#3E3E55;
   --green:#34D399;--red:#F87171;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--bg);-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',sans-serif;background:var(--abg);-webkit-font-smoothing:antialiased;}
 
-/* ── ÉCRAN CLÉ ── */
-.key-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--abg);position:relative;overflow:hidden;}
-.key-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 65%);pointer-events:none;}
-.key-card{background:var(--as1);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:48px 40px;max-width:420px;width:100%;text-align:center;position:relative;}
-.key-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.key-logo{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--atext);margin-bottom:4px;}
+/* ÉCRAN CLÉ */
+#key-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--abg);position:relative;overflow:hidden;}
+#key-screen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 65%);pointer-events:none;}
+.key-card{background:var(--as1);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:48px 40px;max-width:420px;width:100%;text-align:center;position:relative;z-index:1;}
+.key-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:4px 4px 0 0;}
+.key-logo{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--atext);margin-bottom:4px;line-height:1;}
 .key-logo em{color:var(--gold);font-style:italic;}
-.key-sub{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--atext2);margin-bottom:32px;}
+.key-sub{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--atext2);margin-bottom:36px;}
 .key-label{font-size:12px;color:var(--atext2);margin-bottom:10px;text-align:left;}
-.key-input{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:3px;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--atext);outline:none;letter-spacing:1px;margin-bottom:12px;}
+.key-input{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:3px;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--atext);outline:none;letter-spacing:2px;margin-bottom:12px;-webkit-appearance:none;}
 .key-input:focus{border-color:var(--gold);}
-.key-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:3px;padding:14px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;}
-.key-btn:hover{opacity:0.9;}
-.key-error{color:var(--red);font-size:12px;margin-top:10px;min-height:16px;}
-.key-note{font-size:11px;color:var(--atext3);margin-top:16px;}
+.key-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:3px;padding:15px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;-webkit-appearance:none;}
+.key-btn:active{opacity:0.85;}
+.key-error{color:var(--red);font-size:13px;margin-top:12px;min-height:18px;}
+.key-note{font-size:11px;color:var(--atext3);margin-top:18px;}
 
-/* ── MAIN CONTENT ── */
+/* MAIN */
 #main-content{display:none;width:100%;}
 
-/* ── VUE ENTREPRENEUR ── */
+/* VUE ENTREPRENEUR */
 #vue-e{background:var(--abg);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 80px;}
 .ew{width:100%;max-width:680px;}
 .ehdr{display:flex;align-items:center;gap:14px;margin-bottom:32px;}
@@ -58,16 +58,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);-webkit-font-smoothin
 .efl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--atext3);display:block;margin-bottom:6px;}
 .efi{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--atext);outline:none;}
 .efi:focus{border-color:var(--gold);}
-.efh{font-size:11px;color:var(--atext3);margin-top:4px;line-height:1.4;}
-.ebtn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:8px;padding:13px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;margin-top:4px;letter-spacing:.5px;}
-.ebtn:hover{opacity:0.9;}
+.efh{font-size:11px;color:var(--atext3);margin-top:4px;line-height:1.5;}
+.ebtn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:8px;padding:14px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;margin-top:4px;}
 .lbox{background:var(--abg);border:1.5px solid rgba(201,168,76,.25);border-radius:10px;padding:18px;margin-top:14px;display:none;}
 .lbox.on{display:block;}
 .llbl{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
 .lval{font-size:12px;color:var(--atext2);word-break:break-all;padding:10px 12px;background:var(--as1);border-radius:8px;margin-bottom:10px;font-family:monospace;}
 .lcopy{background:var(--gold-d);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:'DM Sans',sans-serif;}
-.lcopy:hover{background:rgba(201,168,76,.18);}
-.lnote{font-size:11px;color:var(--atext3);margin-top:10px;line-height:1.5;}
+.lnote{font-size:11px;color:var(--atext3);margin-top:10px;line-height:1.6;}
 .estats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:14px;}
 .estat{background:var(--as1);border:1px solid var(--aborder);border-radius:10px;padding:14px;}
 .estatn{font-size:26px;font-weight:700;color:var(--atext);}
@@ -78,21 +76,18 @@ thead th{padding:10px 13px;text-align:left;font-size:10px;font-weight:600;text-t
 tbody tr{border-bottom:1px solid #111118;}
 tbody tr:hover{background:var(--as2);}
 tbody td{padding:10px 13px;font-size:12px;color:var(--atext2);}
-.bdg{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;border:1px solid;color:var(--gold);border-color:rgba(201,168,76,.4);}
+.bdg{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;border:1px solid rgba(201,168,76,.4);color:var(--gold);}
 .eexp{background:var(--as1);border:1px solid var(--aborder);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:'DM Sans',sans-serif;}
-.eexp:hover{background:var(--as2);}
 .no-leads{text-align:center;padding:40px;color:var(--atext3);font-size:13px;}
 
-/* ── VUE PROSPECT ── */
+/* VUE PROSPECT */
 #vue-p{background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;}
 .pcard{background:var(--card);border-radius:20px;width:100%;max-width:500px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.08);}
 .pprog{height:3px;background:var(--border);}
-.pprogf{height:100%;background:var(--dark);width:0%;transition:width .6s ease;}
+.pprogf{height:100%;background:var(--dark);width:0%;transition:width .5s ease;}
 .pscreen{display:none;}
-.pscreen.on{display:block;animation:fadeSlide .35s ease;}
-@keyframes fadeSlide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-
-/* Intro */
+.pscreen.on{display:block;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .pintro{padding:44px 36px 38px;}
 .ptag{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
 .ptitle{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,28px);font-weight:400;color:var(--dark);margin-bottom:12px;line-height:1.2;}
@@ -101,11 +96,9 @@ tbody td{padding:10px 13px;font-size:12px;color:var(--atext2);}
 .pofferlbl{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
 .pofferrow{display:flex;gap:10px;font-size:13px;color:var(--mid);margin-bottom:6px;align-items:flex-start;}
 .pdot{width:5px;height:5px;background:var(--gold);border-radius:50%;margin-top:6px;flex-shrink:0;}
-.pbtn{width:100%;background:var(--dark);color:white;border:none;border-radius:10px;padding:15px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;letter-spacing:.5px;}
-.pbtn:hover{background:#333;}
+.pbtn{width:100%;background:var(--dark);color:white;border:none;border-radius:10px;padding:15px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;}
+.pbtn:active{background:#333;}
 .pnote{text-align:center;font-size:11px;color:var(--muted);margin-top:10px;}
-
-/* Questions */
 .pqblock{padding:28px 36px 34px;}
 .pqmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
 .pqnum{font-size:10px;color:var(--muted);font-weight:500;}
@@ -114,40 +107,29 @@ tbody td{padding:10px 13px;font-size:12px;color:var(--atext2);}
 .pqdot.done{background:var(--dark);}
 .pqtxt{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3.5vw,20px);font-weight:400;color:var(--dark);margin-bottom:20px;line-height:1.4;}
 .popts{display:flex;flex-direction:column;gap:8px;}
-.popt{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;}
-.popt:hover{border-color:var(--dark);background:var(--soft);}
-.popt.on{border-color:var(--dark);background:var(--soft);}
-.popto{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;transition:all .2s;position:relative;}
+.popt{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .15s;}
+.popt:active,.popt.on{border-color:var(--dark);background:var(--soft);}
+.popto{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;position:relative;transition:all .2s;}
 .popt.on .popto{background:var(--dark);border-color:var(--dark);}
 .popt.on .popto::after{content:'';width:6px;height:6px;border-radius:50%;background:white;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
 .poptt{font-size:13px;color:var(--dark);line-height:1.5;}
 .pnav{display:flex;justify-content:space-between;margin-top:22px;}
 .pbk{background:none;border:1.5px solid var(--border);border-radius:8px;padding:9px 16px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;}
-.pbk:hover{border-color:var(--dark);color:var(--dark);}
-.pnx{background:var(--dark);color:white;border:none;border-radius:8px;padding:10px 22px;font-weight:600;font-size:13px;cursor:pointer;opacity:.25;pointer-events:none;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.pnx{background:var(--dark);color:white;border:none;border-radius:8px;padding:10px 22px;font-weight:600;font-size:13px;cursor:pointer;opacity:.25;pointer-events:none;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
 .pnx.go{opacity:1;pointer-events:all;}
-.pnx.go:hover{background:#333;}
-
-/* Email */
 .peblock{padding:36px 36px 40px;}
 .peico{font-size:36px;margin-bottom:14px;}
 .petitle{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,23px);font-weight:400;color:var(--dark);margin-bottom:8px;}
 .pesub{font-size:13px;color:var(--mid);margin-bottom:22px;line-height:1.6;}
-.pfield{width:100%;background:var(--soft);border:1.5px solid var(--border);border-radius:9px;padding:12px 14px;font-size:14px;margin-bottom:10px;font-family:'DM Sans',sans-serif;color:var(--dark);outline:none;}
+.pfield{width:100%;background:var(--soft);border:1.5px solid var(--border);border-radius:9px;padding:12px 14px;font-size:14px;margin-bottom:10px;font-family:'DM Sans',sans-serif;color:var(--dark);outline:none;-webkit-appearance:none;}
 .pfield:focus{border-color:var(--dark);background:white;}
 .pprv{font-size:11px;color:var(--muted);text-align:center;margin-top:8px;}
-
-/* Confirmation */
 .pconfirm{padding:48px 36px;text-align:center;}
 .pcico{font-size:52px;margin-bottom:18px;}
 .pctitle{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,28px);font-weight:400;color:var(--dark);margin-bottom:10px;}
 .pcsub{font-size:13px;color:var(--mid);margin-bottom:28px;line-height:1.7;}
 .pcbtn{display:block;background:var(--dark);color:white;border:none;border-radius:10px;padding:15px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;text-align:center;text-decoration:none;cursor:pointer;width:100%;}
-.pcbtn:hover{background:#333;}
 .pcnote{font-size:11px;color:var(--muted);margin-top:12px;}
-
-/* Profil résultat */
-.profil-tag{display:inline-block;padding:6px 16px;border-radius:100px;font-size:12px;font-weight:600;border:1px solid;margin-bottom:16px;}
 
 @media(max-width:560px){
   .eg2{grid-template-columns:1fr;}
@@ -158,27 +140,25 @@ tbody td{padding:10px 13px;font-size:12px;color:var(--atext2);}
 </head>
 <body>
 
-<!-- ── ÉCRAN CLÉ ── -->
-<div id="key-screen" class="key-wrap">
+<div id="key-screen">
   <div class="key-card">
     <div class="key-logo">Moment <em>Troc</em></div>
     <div class="key-sub">Outil de profilage acheteur</div>
     <div class="key-label">Entre ta clé d'activation</div>
     <input type="text" id="key-input" class="key-input" placeholder="Ex : MKB2000-2022A" autocomplete="off" />
-    <button class="key-btn" onclick="activer()">Activer l'outil →</button>
+    <button id="key-btn" class="key-btn">Activer l'outil →</button>
     <div id="key-error" class="key-error"></div>
     <div class="key-note">Chaque clé est personnelle et unique.</div>
   </div>
 </div>
 
-<!-- ── MAIN CONTENT ── -->
 <div id="main-content"></div>
 
 <script>
-// ======================================================
-// CLÉS VALIDES
-// ======================================================
-const VALID_KEYS = [
+(function() {
+
+// ── CLÉS ──
+var VALID_KEYS = [
   "MKB2000-2022A",
   "MT-A1X9-KZ72","MT-B3W5-QP48","MT-C7R2-NL91","MT-D4M8-VS63",
   "MT-E6J1-HT85","MT-F2K7-XB34","MT-G9P3-YC56","MT-H5N6-ZD17",
@@ -187,10 +167,8 @@ const VALID_KEYS = [
   "MT-Q5F6-RN71","MT-R1G4-SO29","MT-S8H7-TK43"
 ];
 
-// ======================================================
-// QUESTIONS PROFILAGE
-// ======================================================
-const QUESTIONS = [
+// ── QUESTIONS ──
+var QS = [
   {q:"Quand tu découvres quelque chose qui pourrait t'aider, tu fais quoi en premier ?",opts:[
     {t:"Je cherche des retours de gens qui l'ont testé dans ma situation.",s:{auto:3}},
     {t:"Je calcule si l'investissement vaut le coup.",s:{optiV:3}},
@@ -216,12 +194,12 @@ const QUESTIONS = [
     {t:"Celui qui explique ce qui fonctionne vraiment — et ce qui ne marche pas.",s:{prot:3}}
   ]},
   {q:"Quand tu parles d'un achat dont tu es satisfait, tu dis quoi ?",opts:[
-    {t:"\"C'était simple, j'ai suivi les étapes et ça a marché.\"",s:{auto:3}},
-    {t:"\"Le résultat était clairement supérieur à ce que j'aurais obtenu seul.\"",s:{optiV:3}},
-    {t:"\"J'ai eu exactement ce que je voulais sans payer trop cher.\"",s:{optiP:3}},
-    {t:"\"C'est ce qu'utilisent les meilleurs dans le domaine.\"",s:{elev:3}},
-    {t:"\"C'était fait exactement pour des gens comme moi.\"",s:{lib:3}},
-    {t:"\"Tout était transparent, pas de mauvaise surprise.\"",s:{prot:3}}
+    {t:"C'était simple, j'ai suivi les étapes et ça a marché.",s:{auto:3}},
+    {t:"Le résultat était clairement supérieur à ce que j'aurais obtenu seul.",s:{optiV:3}},
+    {t:"J'ai eu exactement ce que je voulais sans payer trop cher.",s:{optiP:3}},
+    {t:"C'est ce qu'utilisent les meilleurs dans le domaine.",s:{elev:3}},
+    {t:"C'était fait exactement pour des gens comme moi.",s:{lib:3}},
+    {t:"Tout était transparent, pas de mauvaise surprise.",s:{prot:3}}
   ]},
   {q:"Face à une nouvelle opportunité, qu'est-ce qui peut te bloquer ?",opts:[
     {t:"Le manque d'accompagnement ou de clarté sur comment faire.",s:{auto:3}},
@@ -237,63 +215,76 @@ const QUESTIONS = [
     {t:"En colère. J'ai l'impression d'avoir gaspillé mon argent.",s:{optiP:3}},
     {t:"Gêné. Je n'aurais pas dû me laisser influencer par ce que font les autres.",s:{elev:3}},
     {t:"Déçu. Ce n'était clairement pas fait pour ma situation.",s:{lib:3}},
-    {t:"Méfiant. Je savais que quelque chose n'allait pas, j'aurais dû écouter mon instinct.",s:{prot:3}}
+    {t:"Méfiant. Je savais que quelque chose n'allait pas.",s:{prot:3}}
   ]},
   {q:"Quel type de message te donne le plus envie d'agir ?",opts:[
-    {t:"\"Suis ces 5 étapes et tu obtiendras X résultat.\"",s:{auto:3}},
-    {t:"\"Multiplie tes résultats par 3 avec la même énergie.\"",s:{optiV:3}},
-    {t:"\"Le meilleur rapport qualité-prix du marché.\"",s:{optiP:3}},
-    {t:"\"Rejoins les entrepreneurs qui ont déjà transformé leur image.\"",s:{elev:3}},
-    {t:"\"Conçu spécialement pour les gens dans ta situation.\"",s:{lib:3}},
-    {t:"\"Aucune surprise. On t'explique tout avant que tu décides.\"",s:{prot:3}}
+    {t:"Suis ces 5 étapes et tu obtiendras le résultat.",s:{auto:3}},
+    {t:"Multiplie tes résultats par 3 avec la même énergie.",s:{optiV:3}},
+    {t:"Le meilleur rapport qualité-prix du marché.",s:{optiP:3}},
+    {t:"Rejoins les entrepreneurs qui ont déjà transformé leur image.",s:{elev:3}},
+    {t:"Conçu spécialement pour les gens dans ta situation.",s:{lib:3}},
+    {t:"Aucune surprise. On t'explique tout avant que tu décides.",s:{prot:3}}
   ]},
   {q:"Quel niveau de méfiance as-tu face aux offres en ligne ?",opts:[
-    {t:"Faible — Je fais confiance si ça semble professionnel.",s:{mefiance:"Faible",prot:-1}},
-    {t:"Modéré — J'ai besoin de quelques preuves avant d'agir.",s:{mefiance:"Modéré",prot:1}},
-    {t:"Élevé — Il me faut beaucoup de garanties et de transparence.",s:{mefiance:"Élevé",prot:3}},
-    {t:"Très élevé — J'ai déjà été déçu plusieurs fois et je suis très prudent.",s:{mefiance:"Très élevé",prot:5}}
+    {t:"Faible — Je fais confiance si ça semble professionnel.",s:{mef:"Faible"}},
+    {t:"Modéré — J'ai besoin de quelques preuves avant d'agir.",s:{mef:"Modéré"}},
+    {t:"Élevé — Il me faut beaucoup de garanties et de transparence.",s:{mef:"Élevé"}},
+    {t:"Très élevé — J'ai déjà été déçu plusieurs fois.",s:{mef:"Très élevé"}}
   ]}
 ];
 
-// ======================================================
-// VARIABLES GLOBALES
-// ======================================================
-const urlParams = new URLSearchParams(window.location.search);
-const isProspect = urlParams.has('prospect');
-let pReponses = {};
-let pMefiance = "Non renseigné";
-const pTotal = QUESTIONS.length - 1; // dernière question = méfiance
+var TOTAL_Q = 7; // questions 0-6, question 7 = méfiance
+var reponses = {};
+var mefiance = "";
+var currentQ = -1;
 
-// ======================================================
-// DÉTECTION PAYS
-// ======================================================
-async function detectCountry() {
-  try {
-    const res = await fetch('https://ipapi.co/country_name/');
-    const country = await res.text();
-    return country.trim() || "Inconnu";
-  } catch(e) { return "Inconnu"; }
-}
+// ── UTILITAIRES ──
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s||'').replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);}); }
+function getConfig(){ try{ return JSON.parse(localStorage.getItem("mt_config")||"{}"); }catch(e){ return {}; } }
+function getLeads(){ try{ return JSON.parse(localStorage.getItem("mt_leads")||"[]"); }catch(e){ return []; } }
 
-// ======================================================
-// ACTIVATION CLÉ
-// ======================================================
+// ── INIT ──
+document.addEventListener("DOMContentLoaded", function() {
+  var btn = $("key-btn");
+  var inp = $("key-input");
+
+  btn.addEventListener("click", activer);
+  inp.addEventListener("keydown", function(e){ if(e.key==="Enter"){ e.preventDefault(); activer(); } });
+
+  var params = new URLSearchParams(window.location.search);
+  if(params.has("prospect")) {
+    $("key-screen").style.display = "none";
+    $("main-content").style.display = "block";
+    renderProspect();
+  }
+});
+
+// ── ACTIVATION ──
 function activer() {
-  const key = document.getElementById('key-input').value.trim().toUpperCase();
-  const errDiv = document.getElementById('key-error');
-  if (!key) { errDiv.innerText = 'Veuillez entrer une clé.'; return; }
-  if (VALID_KEYS.map(k=>k.toUpperCase()).includes(key)) {
-    document.getElementById('key-screen').style.display = 'none';
-    document.getElementById('main-content').style.display = 'block';
-    initOutil(false);
+  var key = $("key-input").value.trim().toUpperCase();
+  var err = $("key-error");
+  err.innerText = "";
+  if(!key){ err.innerText = "Veuillez entrer une clé."; return; }
+  var valid = VALID_KEYS.map(function(k){ return k.toUpperCase(); });
+  if(valid.indexOf(key) > -1) {
+    $("key-screen").style.display = "none";
+    $("main-content").style.display = "block";
+    renderEntrepreneur();
   } else {
-    errDiv.innerText = 'Clé invalide. Vérifiez et réessayez.';
+    err.innerText = "Clé invalide. Vérifiez et réessayez.";
   }
 }
 
-// Activer avec touche Entrée
-document.getElementById('key-input').addEventListener('keydown', function(e){
-  if(e.key === 'Enter') activer();
-});
-
-// ==========================================
+// ── VUE ENTREPRENEUR ──
+function renderEntrepreneur() {
+  var c = getConfig();
+  $("main-content").innerHTML = '<div id="vue-e"><div class="ew">' +
+    '<div class="ehdr"><div class="elogo">MT</div><div><div class="etitle">Moment Troc</div><div class="esub">Tableau de bord</div></div></div>' +
+    '<div class="etabs"><button class="etab on" id="tab-cfg">⚙️ Configuration</button><button class="etab" id="tab-leads">📊 Leads</button></div>' +
+    '<div id="tcfg">' +
+      '<div class="ecard"><div class="ecttl">Ton identité</div><div class="eg2">' +
+        '<div class="efg"><label class="efl">Ton nom</label><input class="efi" id="cnom" placeholder="Ex : Meshak Kabou" value="'+esc(c.nom||'')+'"/></div>' +
+        '<div class="efg"><label class="efl">Ton email</label><input class="efi" id="cemail" type="email" placeholder="ton@email.com" value="'+esc(c.email||'')+'"/></div>' +
+      '</div></div>' +
+      '<div class="ecard"><
