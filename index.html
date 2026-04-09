@@ -1,290 +1,109 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moment Troc – Outil de profilage acheteur</title>
-<meta property="og:title" content="Moment Troc — Outil de Profilage Acheteur" />
-<meta property="og:description" content="Identifie le profil exact de ton acheteur pour lui parler le bon langage et vendre sans forcer." />
-<meta property="og:image" content="https://meshak242.github.io/Formulaire-moment-troc/og-image.png" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://meshak242.github.io/Formulaire-moment-troc/" />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#F5F4EF;--card:#FFF;--dark:#1C1C1C;--mid:#555;--muted:#AAA;--border:#E8E6DF;--soft:#F0EEE8;
-  --abg:#0C0C10;--as1:#13131A;--as2:#1C1C26;--aborder:#252535;--aborder2:#323248;
-  --gold:#C9A84C;--gold2:#E2C46A;--gold-d:rgba(201,168,76,0.1);
-  --atext:#EDEAEA;--atext2:#8A8898;--atext3:#3E3E55;
-  --green:#34D399;--red:#F87171;
-}
-body{font-family:'DM Sans',sans-serif;background:var(--abg);-webkit-font-smoothing:antialiased;}
-
-/* ÉCRAN CLÉ */
-#key-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--abg);position:relative;overflow:hidden;}
-#key-screen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 65%);pointer-events:none;}
-.key-card{background:var(--as1);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:48px 40px;max-width:420px;width:100%;text-align:center;position:relative;z-index:1;}
-.key-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:4px 4px 0 0;}
-.key-logo{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--atext);margin-bottom:4px;line-height:1;}
-.key-logo em{color:var(--gold);font-style:italic;}
-.key-sub{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--atext2);margin-bottom:36px;}
-.key-label{font-size:12px;color:var(--atext2);margin-bottom:10px;text-align:left;}
-.key-input{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:3px;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--atext);outline:none;letter-spacing:2px;margin-bottom:12px;-webkit-appearance:none;}
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Moment Troc – Profilage Acheteur</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box;}:root{--bg:#F5F4EF;--card:#FFF;--dark:#1C1C1C;--mid:#555;--muted:#AAA;--border:#E8E6DF;--soft:#F0EEE8;--abg:#0C0C10;--as1:#13131A;--as2:#1C1C26;--aborder:#252535;--aborder2:#323248;--gold:#C9A84C;--gold2:#E2C46A;--gold-d:rgba(201,168,76,0.1);--atext:#EDEAEA;--atext2:#8A8898;--atext3:#3E3E55;--red:#F87171;}
+body{font-family:'DM Sans',sans-serif;background:var(--abg);}
+#key-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--abg);}
+.key-card{background:var(--as1);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:48px 40px;max-width:420px;width:100%;text-align:center;}
+.key-logo{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--atext);}.key-logo em{color:var(--gold);}
+.key-sub{font-size:10px;letter-spacing:4px;color:var(--atext2);margin-bottom:36px;}
+.key-label{font-size:12px;color:var(--atext2);text-align:left;margin-bottom:10px;}
+.key-input{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:3px;padding:14px 16px;color:var(--atext);margin-bottom:12px;}
 .key-input:focus{border-color:var(--gold);}
-.key-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:3px;padding:15px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;-webkit-appearance:none;}
-.key-btn:active{opacity:0.85;}
-.key-error{color:var(--red);font-size:13px;margin-top:12px;min-height:18px;}
+.key-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:3px;padding:15px;font-weight:700;cursor:pointer;}
+.key-error{color:var(--red);font-size:13px;margin-top:12px;}
 .key-note{font-size:11px;color:var(--atext3);margin-top:18px;}
-
-/* MAIN */
-#main-content{display:none;width:100%;}
-
-/* VUE ENTREPRENEUR */
-#vue-e{background:var(--abg);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 80px;}
-.ew{width:100%;max-width:680px;}
-.ehdr{display:flex;align-items:center;gap:14px;margin-bottom:32px;}
-.elogo{width:44px;height:44px;border-radius:50%;background:var(--gold-d);border:1.5px solid rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gold);}
-.etitle{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--atext);}
-.esub{font-size:10px;color:var(--atext2);letter-spacing:.12em;text-transform:uppercase;margin-top:2px;}
+#main-content{display:none;}#vue-e{background:var(--abg);min-height:100vh;padding:40px 20px;}#vue-p{background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;}
+.ew{max-width:680px;margin:auto;}.ehdr{display:flex;gap:14px;margin-bottom:32px;}.elogo{width:44px;height:44px;border-radius:50%;background:var(--gold-d);border:1.5px solid rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;color:var(--gold);}
+.etitle{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--atext);}.esub{font-size:10px;color:var(--atext2);}
 .etabs{display:flex;gap:3px;background:var(--as2);border-radius:8px;padding:3px;width:fit-content;margin-bottom:20px;}
-.etab{padding:8px 20px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;color:var(--atext2);border:none;background:none;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.etab{padding:8px 20px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;color:var(--atext2);background:none;border:none;}
 .etab.on{background:var(--as1);color:var(--atext);}
 .ecard{background:var(--as1);border:1px solid var(--aborder);border-radius:12px;padding:24px;margin-bottom:14px;}
-.ecttl{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
-.eg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.egfull{grid-column:1/-1;}
-.efg{margin-bottom:12px;}
-.efl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--atext3);display:block;margin-bottom:6px;}
-.efi{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--atext);outline:none;}
-.efi:focus{border-color:var(--gold);}
-.efh{font-size:11px;color:var(--atext3);margin-top:4px;line-height:1.5;}
-.ebtn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:8px;padding:14px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;margin-top:4px;}
-.lbox{background:var(--abg);border:1.5px solid rgba(201,168,76,.25);border-radius:10px;padding:18px;margin-top:14px;display:none;}
-.lbox.on{display:block;}
-.llbl{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-.lval{font-size:12px;color:var(--atext2);word-break:break-all;padding:10px 12px;background:var(--as1);border-radius:8px;margin-bottom:10px;font-family:monospace;}
-.lcopy{background:var(--gold-d);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:'DM Sans',sans-serif;}
-.lnote{font-size:11px;color:var(--atext3);margin-top:10px;line-height:1.6;}
+.ecttl{font-size:10px;font-weight:600;letter-spacing:.18em;color:var(--gold);margin-bottom:18px;}
+.eg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}.egfull{grid-column:1/-1;}
+.efg{margin-bottom:12px;}.efl{font-size:10px;color:var(--atext3);display:block;margin-bottom:6px;}
+.efi{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:8px;padding:10px 12px;color:var(--atext);}
+.efi:focus{border-color:var(--gold);}.efh{font-size:11px;color:var(--atext3);margin-top:4px;}
+.ebtn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:8px;padding:14px;font-weight:700;cursor:pointer;}
+.lbox{background:var(--abg);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:18px;margin-top:14px;display:none;}
+.lbox.on{display:block;}.lval{font-size:12px;color:var(--atext2);word-break:break-all;padding:10px;background:var(--as1);border-radius:8px;margin-bottom:10px;font-family:monospace;}
+.lcopy{background:var(--gold-d);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:8px 16px;font-size:12px;color:var(--gold);cursor:pointer;}
 .estats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:14px;}
 .estat{background:var(--as1);border:1px solid var(--aborder);border-radius:10px;padding:14px;}
-.estatn{font-size:26px;font-weight:700;color:var(--atext);}
-.estatl{font-size:10px;color:var(--atext2);margin-top:2px;}
+.estatn{font-size:26px;font-weight:700;color:var(--atext);}.estatl{font-size:10px;color:var(--atext2);}
 .etw{background:var(--as1);border:1px solid var(--aborder);border-radius:12px;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;}
-thead th{padding:10px 13px;text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--atext3);border-bottom:1px solid var(--aborder);}
-tbody tr{border-bottom:1px solid #111118;}
-tbody tr:hover{background:var(--as2);}
-tbody td{padding:10px 13px;font-size:12px;color:var(--atext2);}
-.bdg{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;border:1px solid rgba(201,168,76,.4);color:var(--gold);}
-.eexp{background:var(--as1);border:1px solid var(--aborder);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:'DM Sans',sans-serif;}
-.no-leads{text-align:center;padding:40px;color:var(--atext3);font-size:13px;}
-
-/* VUE PROSPECT */
-#vue-p{background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;}
-.pcard{background:var(--card);border-radius:20px;width:100%;max-width:500px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.08);}
-.pprog{height:3px;background:var(--border);}
-.pprogf{height:100%;background:var(--dark);width:0%;transition:width .5s ease;}
-.pscreen{display:none;}
-.pscreen.on{display:block;animation:fadeUp .3s ease;}
+table{width:100%;border-collapse:collapse;}th,td{padding:10px 13px;text-align:left;font-size:12px;color:var(--atext2);border-bottom:1px solid #111118;}
+.bdg{display:inline-flex;font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;border:1px solid rgba(201,168,76,.4);color:var(--gold);}
+.eexp{background:var(--as1);border:1px solid var(--aborder);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--gold);cursor:pointer;}
+.pcard{background:var(--card);border-radius:20px;max-width:500px;width:100%;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.08);}
+.pprog{height:3px;background:var(--border);}.pprogf{height:100%;background:var(--dark);width:0%;transition:width .5s;}
+.pscreen{display:none;}.pscreen.on{display:block;animation:fadeUp .3s;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.pintro{padding:44px 36px 38px;}
-.ptag{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
-.ptitle{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,28px);font-weight:400;color:var(--dark);margin-bottom:12px;line-height:1.2;}
-.pdesc{font-size:13px;color:var(--mid);margin-bottom:24px;line-height:1.7;}
+.pintro{padding:44px 36px 38px;}.ptag{font-size:10px;letter-spacing:.2em;color:var(--muted);margin-bottom:18px;}
+.ptitle{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,28px);color:var(--dark);margin-bottom:12px;}
+.pdesc{font-size:13px;color:var(--mid);margin-bottom:24px;}
 .poffer{background:var(--soft);border-radius:10px;padding:14px 18px;margin-bottom:24px;}
-.pofferlbl{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
-.pofferrow{display:flex;gap:10px;font-size:13px;color:var(--mid);margin-bottom:6px;align-items:flex-start;}
-.pdot{width:5px;height:5px;background:var(--gold);border-radius:50%;margin-top:6px;flex-shrink:0;}
-.pbtn{width:100%;background:var(--dark);color:white;border:none;border-radius:10px;padding:15px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;}
-.pbtn:active{background:#333;}
-.pnote{text-align:center;font-size:11px;color:var(--muted);margin-top:10px;}
-.pqblock{padding:28px 36px 34px;}
-.pqmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
-.pqnum{font-size:10px;color:var(--muted);font-weight:500;}
-.pqdots{display:flex;gap:5px;}
-.pqdot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background .3s;}
-.pqdot.done{background:var(--dark);}
-.pqtxt{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3.5vw,20px);font-weight:400;color:var(--dark);margin-bottom:20px;line-height:1.4;}
+.pofferlbl{font-size:10px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px;}
+.pofferrow{display:flex;gap:10px;font-size:13px;color:var(--mid);margin-bottom:6px;}
+.pdot{width:5px;height:5px;background:var(--gold);border-radius:50%;margin-top:6px;}
+.pbtn{width:100%;background:var(--dark);color:#fff;border:none;border-radius:10px;padding:15px;font-weight:600;cursor:pointer;}
+.pnote{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;}
+.pqblock{padding:28px 36px 34px;}.pqmeta{display:flex;justify-content:space-between;margin-bottom:20px;}
+.pqnum{font-size:10px;color:var(--muted);}.pqdots{display:flex;gap:5px;}
+.pqdot{width:6px;height:6px;border-radius:50%;background:var(--border);}.pqdot.done{background:var(--dark);}
+.pqtxt{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3.5vw,20px);color:var(--dark);margin-bottom:20px;}
 .popts{display:flex;flex-direction:column;gap:8px;}
-.popt{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .15s;}
-.popt:active,.popt.on{border-color:var(--dark);background:var(--soft);}
-.popto{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;position:relative;transition:all .2s;}
+.popt{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;}
+.popt.on{border-color:var(--dark);background:var(--soft);}
+.popto{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;position:relative;}
 .popt.on .popto{background:var(--dark);border-color:var(--dark);}
-.popt.on .popto::after{content:'';width:6px;height:6px;border-radius:50%;background:white;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
-.poptt{font-size:13px;color:var(--dark);line-height:1.5;}
+.popt.on .popto::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.poptt{font-size:13px;color:var(--dark);}
 .pnav{display:flex;justify-content:space-between;margin-top:22px;}
-.pbk{background:none;border:1.5px solid var(--border);border-radius:8px;padding:9px 16px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;}
-.pnx{background:var(--dark);color:white;border:none;border-radius:8px;padding:10px 22px;font-weight:600;font-size:13px;cursor:pointer;opacity:.25;pointer-events:none;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
+.pbk{background:none;border:1.5px solid var(--border);border-radius:8px;padding:9px 16px;font-size:12px;color:var(--muted);cursor:pointer;}
+.pnx{background:var(--dark);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-weight:600;font-size:13px;cursor:pointer;opacity:.25;pointer-events:none;}
 .pnx.go{opacity:1;pointer-events:all;}
-.peblock{padding:36px 36px 40px;}
-.peico{font-size:36px;margin-bottom:14px;}
-.petitle{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,23px);font-weight:400;color:var(--dark);margin-bottom:8px;}
-.pesub{font-size:13px;color:var(--mid);margin-bottom:22px;line-height:1.6;}
-.pfield{width:100%;background:var(--soft);border:1.5px solid var(--border);border-radius:9px;padding:12px 14px;font-size:14px;margin-bottom:10px;font-family:'DM Sans',sans-serif;color:var(--dark);outline:none;-webkit-appearance:none;}
-.pfield:focus{border-color:var(--dark);background:white;}
+.peblock{padding:36px 36px 40px;}.peico{font-size:36px;margin-bottom:14px;}
+.petitle{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,23px);color:var(--dark);margin-bottom:8px;}
+.pesub{font-size:13px;color:var(--mid);margin-bottom:22px;}
+.pfield{width:100%;background:var(--soft);border:1.5px solid var(--border);border-radius:9px;padding:12px 14px;font-size:14px;margin-bottom:10px;}
+.pfield:focus{border-color:var(--dark);background:#fff;}
 .pprv{font-size:11px;color:var(--muted);text-align:center;margin-top:8px;}
-.pconfirm{padding:48px 36px;text-align:center;}
-.pcico{font-size:52px;margin-bottom:18px;}
-.pctitle{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,28px);font-weight:400;color:var(--dark);margin-bottom:10px;}
-.pcsub{font-size:13px;color:var(--mid);margin-bottom:28px;line-height:1.7;}
-.pcbtn{display:block;background:var(--dark);color:white;border:none;border-radius:10px;padding:15px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;text-align:center;text-decoration:none;cursor:pointer;width:100%;}
+.pconfirm{padding:48px 36px;text-align:center;}.pcico{font-size:52px;margin-bottom:18px;}
+.pctitle{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,28px);color:var(--dark);margin-bottom:10px;}
+.pcsub{font-size:13px;color:var(--mid);margin-bottom:28px;}
+.pcbtn{display:block;background:var(--dark);color:#fff;border:none;border-radius:10px;padding:15px;text-align:center;text-decoration:none;cursor:pointer;width:100%;}
 .pcnote{font-size:11px;color:var(--muted);margin-top:12px;}
-
-@media(max-width:560px){
-  .eg2{grid-template-columns:1fr;}
-  .pqblock,.pintro,.peblock,.pconfirm{padding-left:20px;padding-right:20px;}
-  .key-card{padding:36px 24px;}
-}
-</style>
-</head>
+@media(max-width:560px){.eg2{grid-template-columns:1fr;}.pqblock,.pintro,.peblock,.pconfirm{padding-left:20px;padding-right:20px;}}
+</style></head>
 <body>
-
-<div id="key-screen">
-  <div class="key-card">
-    <div class="key-logo">Moment <em>Troc</em></div>
-    <div class="key-sub">Outil de profilage acheteur</div>
-    <div class="key-label">Entre ta clé d'activation</div>
-    <input type="text" id="key-input" class="key-input" placeholder="Ex : MKB2000-2022A" autocomplete="off" />
-    <button id="key-btn" class="key-btn">Activer l'outil →</button>
-    <div id="key-error" class="key-error"></div>
-    <div class="key-note">Chaque clé est personnelle et unique.</div>
-  </div>
-</div>
-
+<div id="key-screen"><div class="key-card"><div class="key-logo">Moment <em>Troc</em></div><div class="key-sub">Profilage acheteur</div><div class="key-label">Clé d'activation</div><input type="text" id="key-input" class="key-input" placeholder="Ex: MKB2000-2022A"><button id="key-btn" class="key-btn">Activer →</button><div id="key-error" class="key-error"></div><div class="key-note">Clé personnelle unique.</div></div></div>
 <div id="main-content"></div>
-
 <script>
-(function() {
-
-// ── CLÉS ──
-var VALID_KEYS = [
-  "MKB2000-2022A",
-  "MT-A1X9-KZ72","MT-B3W5-QP48","MT-C7R2-NL91","MT-D4M8-VS63",
-  "MT-E6J1-HT85","MT-F2K7-XB34","MT-G9P3-YC56","MT-H5N6-ZD17",
-  "MT-I8L4-WE29","MT-J1Q9-RF43","MT-K3S7-UG68","MT-L6T2-MH15",
-  "MT-M4V8-JI92","MT-N7B1-OK37","MT-O2C5-PL84","MT-P9D3-QM56",
-  "MT-Q5F6-RN71","MT-R1G4-SO29","MT-S8H7-TK43"
-];
-
-// ── QUESTIONS ──
-var QS = [
-  {q:"Quand tu découvres quelque chose qui pourrait t'aider, tu fais quoi en premier ?",opts:[
-    {t:"Je cherche des retours de gens qui l'ont testé dans ma situation.",s:{auto:3}},
-    {t:"Je calcule si l'investissement vaut le coup.",s:{optiV:3}},
-    {t:"Je compare les prix pour ne pas payer trop cher.",s:{optiP:3}},
-    {t:"Je regarde qui l'utilise et si ça correspond à mon image.",s:{elev:3}},
-    {t:"Je vérifie si c'est vraiment adapté à ma situation précise.",s:{lib:3}},
-    {t:"Je lis les conditions en détail et cherche ce qui pourrait ne pas marcher.",s:{prot:3}}
-  ]},
-  {q:"Quel est ton plus grand défi en ce moment ?",opts:[
-    {t:"Je ne sais pas par où commencer. J'ai besoin d'étapes claires.",s:{auto:3}},
-    {t:"Je travaille beaucoup mais les résultats ne sont pas proportionnels.",s:{optiV:3}},
-    {t:"Je dépense pour des choses qui ne livrent pas ce qu'elles promettent.",s:{optiP:3}},
-    {t:"J'ai du mal à me différencier et être perçu à ma juste valeur.",s:{elev:3}},
-    {t:"Les solutions que je trouve sont trop génériques pour ma situation.",s:{lib:3}},
-    {t:"J'ai essayé des choses qui n'ont pas marché. J'ai du mal à refaire confiance.",s:{prot:3}}
-  ]},
-  {q:"Entre deux contenus gratuits sur le même sujet, lequel tu ouvres en premier ?",opts:[
-    {t:"Celui qui promet un plan concret avec des étapes claires.",s:{auto:3}},
-    {t:"Celui qui montre des résultats chiffrés et un retour sur investissement.",s:{optiV:3}},
-    {t:"Celui qui compare plusieurs options pour faire le meilleur choix.",s:{optiP:3}},
-    {t:"Celui bien présenté, utilisé par des gens reconnus.",s:{elev:3}},
-    {t:"Celui dont le titre parle exactement de ma situation précise.",s:{lib:3}},
-    {t:"Celui qui explique ce qui fonctionne vraiment — et ce qui ne marche pas.",s:{prot:3}}
-  ]},
-  {q:"Quand tu parles d'un achat dont tu es satisfait, tu dis quoi ?",opts:[
-    {t:"C'était simple, j'ai suivi les étapes et ça a marché.",s:{auto:3}},
-    {t:"Le résultat était clairement supérieur à ce que j'aurais obtenu seul.",s:{optiV:3}},
-    {t:"J'ai eu exactement ce que je voulais sans payer trop cher.",s:{optiP:3}},
-    {t:"C'est ce qu'utilisent les meilleurs dans le domaine.",s:{elev:3}},
-    {t:"C'était fait exactement pour des gens comme moi.",s:{lib:3}},
-    {t:"Tout était transparent, pas de mauvaise surprise.",s:{prot:3}}
-  ]},
-  {q:"Face à une nouvelle opportunité, qu'est-ce qui peut te bloquer ?",opts:[
-    {t:"Le manque d'accompagnement ou de clarté sur comment faire.",s:{auto:3}},
-    {t:"Le doute que le retour sur investissement soit au rendez-vous.",s:{optiV:3}},
-    {t:"Le prix qui semble trop élevé par rapport à d'autres options.",s:{optiP:3}},
-    {t:"L'image que ça renvoie si ça ne correspond pas à mon positionnement.",s:{elev:3}},
-    {t:"Le fait que ce n'est pas assez personnalisé pour ma situation.",s:{lib:3}},
-    {t:"La peur de me faire avoir ou d'être déçu encore une fois.",s:{prot:3}}
-  ]},
-  {q:"Comment tu te sens quand quelque chose ne marche pas comme prévu ?",opts:[
-    {t:"Perdu. J'aurais eu besoin d'un guide étape par étape.",s:{auto:3}},
-    {t:"Frustré. J'aurais dû mieux évaluer le potentiel avant.",s:{optiV:3}},
-    {t:"En colère. J'ai l'impression d'avoir gaspillé mon argent.",s:{optiP:3}},
-    {t:"Gêné. Je n'aurais pas dû me laisser influencer par ce que font les autres.",s:{elev:3}},
-    {t:"Déçu. Ce n'était clairement pas fait pour ma situation.",s:{lib:3}},
-    {t:"Méfiant. Je savais que quelque chose n'allait pas.",s:{prot:3}}
-  ]},
-  {q:"Quel type de message te donne le plus envie d'agir ?",opts:[
-    {t:"Suis ces 5 étapes et tu obtiendras le résultat.",s:{auto:3}},
-    {t:"Multiplie tes résultats par 3 avec la même énergie.",s:{optiV:3}},
-    {t:"Le meilleur rapport qualité-prix du marché.",s:{optiP:3}},
-    {t:"Rejoins les entrepreneurs qui ont déjà transformé leur image.",s:{elev:3}},
-    {t:"Conçu spécialement pour les gens dans ta situation.",s:{lib:3}},
-    {t:"Aucune surprise. On t'explique tout avant que tu décides.",s:{prot:3}}
-  ]},
-  {q:"Quel niveau de méfiance as-tu face aux offres en ligne ?",opts:[
-    {t:"Faible — Je fais confiance si ça semble professionnel.",s:{mef:"Faible"}},
-    {t:"Modéré — J'ai besoin de quelques preuves avant d'agir.",s:{mef:"Modéré"}},
-    {t:"Élevé — Il me faut beaucoup de garanties et de transparence.",s:{mef:"Élevé"}},
-    {t:"Très élevé — J'ai déjà été déçu plusieurs fois.",s:{mef:"Très élevé"}}
-  ]}
-];
-
-var TOTAL_Q = 7; // questions 0-6, question 7 = méfiance
-var reponses = {};
-var mefiance = "";
-var currentQ = -1;
-
-// ── UTILITAIRES ──
-function $(id){ return document.getElementById(id); }
-function esc(s){ return String(s||'').replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);}); }
-function getConfig(){ try{ return JSON.parse(localStorage.getItem("mt_config")||"{}"); }catch(e){ return {}; } }
-function getLeads(){ try{ return JSON.parse(localStorage.getItem("mt_leads")||"[]"); }catch(e){ return []; } }
-
-// ── INIT ──
-document.addEventListener("DOMContentLoaded", function() {
-  var btn = $("key-btn");
-  var inp = $("key-input");
-
-  btn.addEventListener("click", activer);
-  inp.addEventListener("keydown", function(e){ if(e.key==="Enter"){ e.preventDefault(); activer(); } });
-
-  var params = new URLSearchParams(window.location.search);
-  if(params.has("prospect")) {
-    $("key-screen").style.display = "none";
-    $("main-content").style.display = "block";
-    renderProspect();
-  }
-});
-
-// ── ACTIVATION ──
-function activer() {
-  var key = $("key-input").value.trim().toUpperCase();
-  var err = $("key-error");
-  err.innerText = "";
-  if(!key){ err.innerText = "Veuillez entrer une clé."; return; }
-  var valid = VALID_KEYS.map(function(k){ return k.toUpperCase(); });
-  if(valid.indexOf(key) > -1) {
-    $("key-screen").style.display = "none";
-    $("main-content").style.display = "block";
-    renderEntrepreneur();
-  } else {
-    err.innerText = "Clé invalide. Vérifiez et réessayez.";
-  }
-}
-
-// ── VUE ENTREPRENEUR ──
-function renderEntrepreneur() {
-  var c = getConfig();
-  $("main-content").innerHTML = '<div id="vue-e"><div class="ew">' +
-    '<div class="ehdr"><div class="elogo">MT</div><div><div class="etitle">Moment Troc</div><div class="esub">Tableau de bord</div></div></div>' +
-    '<div class="etabs"><button class="etab on" id="tab-cfg">⚙️ Configuration</button><button class="etab" id="tab-leads">📊 Leads</button></div>' +
-    '<div id="tcfg">' +
-      '<div class="ecard"><div class="ecttl">Ton identité</div><div class="eg2">' +
-        '<div class="efg"><label class="efl">Ton nom</label><input class="efi" id="cnom" placeholder="Ex : Meshak Kabou" value="'+esc(c.nom||'')+'"/></div>' +
-        '<div class="efg"><label class="efl">Ton email</label><input class="efi" id="cemail" type="email" placeholder="ton@email.com" value="'+esc(c.email||'')+'"/></div>' +
-      '</div></div>' +
-      '<div class="ecard"><
+(function(){
+const K=["MKB2000-2022A","MT-A1X9-KZ72","MT-B3W5-QP48","MT-C7R2-NL91","MT-D4M8-VS63","MT-E6J1-HT85","MT-F2K7-XB34","MT-G9P3-YC56","MT-H5N6-ZD17","MT-I8L4-WE29","MT-J1Q9-RF43","MT-K3S7-UG68","MT-L6T2-MH15","MT-M4V8-JI92","MT-N7B1-OK37","MT-O2C5-PL84","MT-P9D3-QM56","MT-Q5F6-RN71","MT-R1G4-SO29","MT-S8H7-TK43"];
+const Q=[{q:"Quand tu découvres quelque chose qui pourrait t'aider, tu fais quoi en premier ?",o:[{t:"Je cherche des retours de gens qui l'ont testé.",s:{a:3}},{t:"Je calcule si l'investissement vaut le coup.",s:{b:3}},{t:"Je compare les prix pour ne pas payer trop cher.",s:{c:3}},{t:"Je regarde qui l'utilise et si ça correspond à mon image.",s:{d:3}},{t:"Je vérifie si c'est adapté à ma situation.",s:{e:3}},{t:"Je lis les conditions et cherche ce qui pourrait ne pas marcher.",s:{f:3}}]},{q:"Quel est ton plus grand défi ?",o:[{t:"Je ne sais pas par où commencer.",s:{a:3}},{t:"Les résultats ne sont pas proportionnels.",s:{b:3}},{t:"Je dépense pour des promesses non tenues.",s:{c:3}},{t:"J'ai du mal à me différencier.",s:{d:3}},{t:"Les solutions sont trop génériques.",s:{e:3}},{t:"J'ai du mal à refaire confiance.",s:{f:3}}]},{q:"Entre deux contenus gratuits, lequel tu ouvres ?",o:[{t:"Celui avec un plan clair.",s:{a:3}},{t:"Celui avec des résultats chiffrés.",s:{b:3}},{t:"Celui qui compare les options.",s:{c:3}},{t:"Celui bien présenté.",s:{d:3}},{t:"Celui qui parle de ma situation.",s:{e:3}},{t:"Celui qui explique ce qui ne marche pas.",s:{f:3}}]},{q:"Quand tu es satisfait d'un achat, tu dis ?",o:[{t:"C'était simple et ça a marché.",s:{a:3}},{t:"C'est rentable.",s:{b:3}},{t:"Excellent rapport qualité-prix.",s:{c:3}},{t:"Ça m'a aidé à me positionner.",s:{d:3}},{t:"C'était fait pour moi.",s:{e:3}},{t:"Pas de mauvaise surprise.",s:{f:3}}]},{q:"Face à une nouvelle opportunité, qu'est-ce qui peut te bloquer ?",o:[{t:"Manque d'accompagnement.",s:{a:3}},{t:"Doute sur le ROI.",s:{b:3}},{t:"Prix trop élevé.",s:{c:3}},{t:"Image pas adaptée.",s:{d:3}},{t:"Pas personnalisé.",s:{e:3}},{t:"Peur d'être déçu.",s:{f:3}}]},{q:"Comment tu te sens quand ça ne marche pas ?",o:[{t:"Perdu, j'aurais eu besoin d'un guide.",s:{a:3}},{t:"Frustré, j'aurais dû mieux évaluer.",s:{b:3}},{t:"En colère, argent gaspillé.",s:{c:3}},{t:"Gêné, je me suis laissé influencer.",s:{d:3}},{t:"Déçu, ce n'était pas pour moi.",s:{e:3}},{t:"Méfiant, je sentais un problème.",s:{f:3}}]},{q:"Quel message te donne envie d'agir ?",o:[{t:"Suis ces 5 étapes.",s:{a:3}},{t:"Multiplie tes résultats.",s:{b:3}},{t:"Meilleur rapport qualité-prix.",s:{c:3}},{t:"Rejoins les entrepreneurs qui ont réussi.",s:{d:3}},{t:"Conçu pour toi.",s:{e:3}},{t:"Aucune surprise, tout est clair.",s:{f:3}}]},{q:"Niveau de méfiance face aux offres en ligne ?",o:[{t:"Faible – je fais confiance",m:"Faible"},{t:"Modéré – besoin de preuves",m:"Modéré"},{t:"Élevé – garanties nécessaires",m:"Élevé"},{t:"Très élevé – déjà déçu",m:"Très élevé"}]}];
+var r={},mef="";function $(i){return document.getElementById(i);}
+function esc(s){return String(s||'').replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);});}
+function getC(){try{return JSON.parse(localStorage.getItem("mt_c")||"{}");}catch(e){return{};}}
+function getL(){try{return JSON.parse(localStorage.getItem("mt_l")||"[]");}catch(e){return[];}}
+function saveL(l){localStorage.setItem("mt_l",JSON.stringify(l));}
+document.addEventListener("DOMContentLoaded",function(){var b=$("key-btn"),i=$("key-input");if(b)b.onclick=activer;if(i)i.onkeydown=function(e){if(e.key==="Enter")activer();};if(location.search.includes("prospect")){$("key-screen").style.display="none";$("main-content").style.display="block";renderP();}});
+function activer(){var k=$("key-input").value.trim().toUpperCase(),e=$("key-error");e.innerText="";if(!k){e.innerText="Entrez une clé.";return;}if(K.indexOf(k)>-1){$("key-screen").style.display="none";$("main-content").style.display="block";renderE();}else{e.innerText="Clé invalide.";}}
+function renderE(){var c=getC();$("main-content").innerHTML='<div id="vue-e"><div class="ew"><div class="ehdr"><div class="elogo">MT</div><div><div class="etitle">Moment Troc</div><div class="esub">Tableau de bord</div></div></div><div class="etabs"><button class="etab on" id="tab-cfg">⚙️ Config</button><button class="etab" id="tab-leads">📊 Leads</button></div><div id="tcfg"><div class="ecard"><div class="ecttl">Ton identité</div><div class="eg2"><div class="efg"><label class="efl">Nom</label><input class="efi" id="cnom" value="'+esc(c.nom||'')+'"></div><div class="efg"><label class="efl">Email</label><input class="efi" id="cemail" type="email" value="'+esc(c.email||'')+'"></div></div></div><div class="ecard"><div class="ecttl">Ton offre</div><div class="efg egfull"><label class="efl">Titre</label><input class="efi" id="ctitre" value="'+esc(c.titre||'')+'"></div><div class="efg egfull"><label class="efl">Lead magnet</label><input class="efi" id="ccadeau" value="'+esc(c.cadeau||'')+'"></div><div class="efg egfull"><label class="efl">Lien du lead magnet</label><input class="efi" id="clien" value="'+esc(c.lien||'')+'"></div></div><div class="ecard"><div class="ecttl">Reception email (Formspree)</div><div class="efg egfull"><label class="efl">URL Formspree</label><input class="efi" id="cformspree" value="'+esc(c.formspree||'')+'"></div></div><button class="ebtn" id="btn-save">💾 Sauvegarder et générer le lien</button><div class="lbox" id="lbox"><div class="lval" id="lval"></div><button class="lcopy" id="lcbtn">📋 Copier le lien</button><div class="lnote">Partage ce lien ?prospect</div></div></div><div id="tleads" style="display:none;"><div class="estats" id="estats"></div><div class="ecard" style="display:flex;justify-content:space-between;"><div class="ecttl">Leads</div><button class="eexp" id="btn-export">⬇️ CSV</button></div><div class="etw"><table><thead><tr><th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Pays</th><th>Date</th></tr></thead><tbody id="etbody"></tbody></table></div></div></div></div>';
+$("tab-cfg").onclick=function(){eTab("cfg",this);};$("tab-leads").onclick=function(){eTab("leads",this);};$("btn-save").onclick=save;$("btn-export").onclick=exportCSV;}
+function eTab(t,b){document.querySelectorAll(".etab").forEach(x=>x.classList.remove("on"));b.classList.add("on");$("tcfg").style.display=t==="cfg"?"block":"none";$("tleads").style.display=t==="leads"?"block":"none";if(t==="leads")loadLeads();}
+function save(){var cfg={nom:$("cnom").value,email:$("cemail").value,titre:$("ctitre").value,cadeau:$("ccadeau").value,lien:$("clien").value,formspree:$("cformspree").value};localStorage.setItem("mt_c",JSON.stringify(cfg));var url=location.href.split("?")[0]+"?prospect";$("lval").innerText=url;$("lbox").classList.add("on");$("lcbtn").onclick=function(){navigator.clipboard.writeText(url);$("lcbtn").innerText="✓ Copié !";setTimeout(()=>{$("lcbtn").innerText="📋 Copier le lien";},2000);};}
+function loadLeads(){var leads=getL(),tb=$("etbody"),st=$("estats");if(!tb)return;if(!leads.length){tb.innerHTML='<tr><td colspan="6">Aucun lead</td></tr>';if(st)st.innerHTML="";return;}var stats={};tb.innerHTML="";leads.forEach(l=>{var p=l.profil||"Inconnu";stats[p]=(stats[p]||0)+1;tb.innerHTML+=`<tr><td>${esc(l.prenom)}</td><td>${esc(l.email)}</td><td><span class='bdg'>${esc(p)}</span></td><td>${esc(l.mefiance)}</td><td>${esc(l.pays)}</td><td>${new Date(l.date).toLocaleDateString()}</td></tr>`;});if(st)st.innerHTML=Object.entries(stats).map(e=>`<div class='estat'><div class='estatn'>${e[1]}</div><div class='estatl'>${e[0]}</div></div>`).join("");}
+function exportCSV(){var leads=getL();if(!leads.length){alert("Aucun lead");return;}var csv="Prénom,Email,Profil,Méfiance,Pays,Date\n";leads.forEach(l=>{csv+=`"${l.prenom}","${l.email}","${l.profil}","${l.mefiance}","${l.pays}","${l.date}"\n`;});var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv]));a.download="leads.csv";a.click();URL.revokeObjectURL(a.href);}
+function renderP(){var c=getC(),titre=c.titre||"Découvre ton profil acheteur",cadeau=c.cadeau||"ton lead magnet";var dots=Array.from({length:8},(_,j)=>`<div class='pqdot' id='d${j}'></div>`).join("");var qHtml="";for(var i=0;i<7;i++){var q=Q[i];var opts=q.o.map((o,oi)=>`<div class='popt' data-q='${i}' data-oi='${oi}' data-t='${o.t.replace(/'/g,"&#39;")}'><div class='popto'></div><div class='poptt'>${o.t}</div></div>`).join("");qHtml+=`<div class='pscreen' id='ps-q${i}'><div class='pqblock'><div class='pqmeta'><span class='pqnum'>Question ${i+1}/8</span><div class='pqdots'>${dots}</div></div><div class='pqtxt'>${q.q}</div><div class='popts'>${opts}</div><div class='pnav'><button class='pbk' data-nav='${i}' data-dir='-1'>${i===0?"Annuler":"← Retour"}</button><button class='pnx' id='pnx${i}' data-nav='${i}' data-dir='1'>Suivant →</button></div></div></div>`;}var mefOpts=Q[7].o.map((o,oi)=>`<div class='popt' data-mef='1' data-oi='${oi}' data-t='${o.t.replace(/'/g,"&#39;")}'><div class='popto'></div><div class='poptt'>${o.t}</div></div>`).join("");$("main-content").innerHTML=`<div id='vue-p'><div class='pcard'><div class='pprog'><div class='pprogf' id='progf'></div></div><div class='pscreen on' id='ps-intro'><div class='pintro'><div class='ptag'>Moment Troc · Profilage</div><div class='ptitle'>${titre}</div><div class='pdesc'>Réponds à 8 questions rapides.</div><div class='poffer'><div class='pofferlbl'>Ce que tu reçois</div><div class='pofferrow'><div class='pdot'></div><div>Ton profil acheteur</div></div><div class='pofferrow'><div class='pdot'></div><div>Accès à <strong>${cadeau}</strong></div></div></div><button class='pbtn' id='btn-start'>Commencer →</button><div class='pnote'>Gratuit · 2 min</div></div></div>${qHtml}<div class='pscreen' id='ps-mef'><div class='pqblock'><div class='pqmeta'><span class='pqnum'>Dernière question</span><div class='pqdots'>${dots}</div></div><div class='pqtxt'>${Q[7].q}</div><div class='popts'>${mefOpts}</div><div class='pnav'><button class='pbk' id='pbk-mef'>← Retour</button><button class='pnx' id='pnx-mef'>Continuer →</button></div></div></div><div class='pscreen' id='ps-email'><div class='peblock'><div class='peico'>🎯</div><div class='petitle'>Presque là !</div><div class='pesub'>Ton prénom et email pour recevoir ton profil.</div><input class='pfield' id='pprenom' placeholder='Prénom'><input class='pfield' id='pemail' placeholder='Email'><button class='pbtn' id='btn-submit'>Recevoir mon profil →</button><div class='pprv'>🔒 Données confidentielles</div></div></div><div class='pscreen' id='ps-confirm'><div class='pconfirm'><div class='pcico'>✅</div><div class='pctitle' id='pctitle'>Profil identifié !</div><div class='pcsub' id='pcsub'></div><a href='#' class='pcbtn' id='pclien'>Accéder →</a><div class='pcnote'>Vérifie aussi tes emails.</div></div></div></div></div>`;$("btn-start").onclick=()=>{pShow("q0");pProgress(1);};$("btn-submit").onclick=pSoumettre;$("pbk-mef").onclick=()=>{pShow("q6");pProgress(7);};$("pnx-mef").onclick=()=>{if(mef){pShow("email");pProgress(8);}else alert("Sélectionne ton niveau de méfiance.");};document.querySelectorAll(".popt").forEach(el=>{el.onclick=function(){var qi=this.getAttribute("data-q"),isMef=this.getAttribute("data-mef"),t=this.getAttribute("data-t");if(isMef){document.querySelectorAll("[data-mef]").forEach(o=>o.classList.remove("on"));this.classList.add("on");mef=t;$("pnx-mef").classList.add("go");}else if(qi){var idx=parseInt(qi);document.querySelectorAll(`[data-q='${idx}']`).forEach(o=>o.classList.remove("on"));this.classList.add("on");r[idx]=t;$("pnx"+idx).classList.add("go");}}});document.querySelectorAll(".pbk[data-nav]").forEach(el=>{el.onclick=function(){var i=parseInt(this.getAttribute("data-nav"));if(i===0){pShow("intro");pProgress(0);}else{pShow("q"+(i-1));pProgress(i);}}});document.querySelectorAll(".pnx[data-nav]").forEach(el=>{el.onclick=function(){var i=parseInt(this.getAttribute("data-nav"));if(r[i]!==undefined){var n=i+1;if(n>=7){pShow("mef");pProgress(7.5);}else{pShow("q"+n);pProgress(n+1);}}else alert("Réponds à la question d'abord.");}});}
+function pShow(s){document.querySelectorAll(".pscreen").forEach(x=>x.classList.remove("on"));var e=$("ps-"+s);if(e)e.classList.add("on");var c=parseInt(s.replace("q",""));if(!isNaN(c))document.querySelectorAll(".pqdot").forEach((d,i)=>d.classList.toggle("done",i<=c));else if(s==="intro")document.querySelectorAll(".pqdot").forEach(d=>d.classList.remove("done"));else if(s==="mef")document.querySelectorAll(".pqdot").forEach((d,i)=>d.classList.toggle("done",i<7));}
+function pProgress(step){var total=10,pct=Math.round((step/total)*100);var bar=$("progf");if(bar)bar.style.width=pct+"%";}
+function calcProfil(){var s={a:0,b:0,c:0,d:0,e:0,f:0};for(var i=0;i<7;i++){var rep=r[i];if(!rep)continue;var opt=Q[i].o.find(o=>o.t===rep);if(opt&&opt.s)for(var k in opt.s)s[k]+=opt.s[k];}var dom=Object.keys(s).reduce((a,b)=>s[a]>s[b]?a:b);var lab={a:"Automatiseur",b:"Optimiseur Valeur",c:"Optimiseur Prix",d:"Élévateur",e:"Libérateur",f:"Protecteur"};return lab[dom]||dom;}
+async function getCountry(){try{var r=await fetch("https://ipapi.co/country_name/");return (await r.text()).trim()||"France";}catch(e){return "France";}}
+async function pSoumettre(){var pn=$("pprenom").value.trim(),em=$("pemail").value.trim();if(!pn||!em){alert("Prénom et email requis.");return;}if(!em.includes("@")){alert("Email invalide.");return;}if(!mef){alert("Réponds à la question de méfiance.");return;}var profil=calcProfil(),pays=await getCountry(),c=getC();var lead={prenom:pn,email:em,profil:profil,mefiance:mef,pays:pays,date:new Date().toISOString()};var leads=getL();leads.push(lead);saveL(leads);if(c.formspree&&c.formspree.includes("formspree.io")){fetch(c.formspree,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(lead)}).catch(e=>console.warn);}$("pctitle").innerHTML="Tu es un "+profil+" 🎯";$("pcsub").innerHTML="Profil: "+profil+". Méfiance: "+mef+". Accès ci-dessous.";$("pclien").href=c.lien||"#";pShow("confirm");pProgress(10);}
+})();
+</script>
+</body>
+</html>
