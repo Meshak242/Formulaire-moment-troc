@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Moment Troc – Accès lead magnet</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Moment Troc</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
 *{margin:0;padding:0;box-sizing:border-box;}:root{--bg:#F5F4EF;--card:#FFF;--dark:#1C1C1C;--mid:#555;--muted:#AAA;--border:#E8E6DF;--soft:#F0EEE8;--abg:#0C0C10;--as1:#13131A;--as2:#1C1C26;--aborder:#252535;--aborder2:#323248;--gold:#C9A84C;--gold2:#E2C46A;--gold-d:rgba(201,168,76,0.1);--atext:#EDEAEA;--atext2:#8A8898;--atext3:#3E3E55;--red:#F87171;}
 body{font-family:'DM Sans',sans-serif;background:var(--abg);}
-#key-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--abg);}
+.key-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
 .key-card{background:var(--as1);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:48px 40px;max-width:420px;width:100%;text-align:center;}
 .key-logo{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--atext);}.key-logo em{color:var(--gold);}
 .key-sub{font-size:10px;letter-spacing:4px;color:var(--atext2);margin-bottom:36px;}
 .key-label{font-size:12px;color:var(--atext2);text-align:left;margin-bottom:10px;}
 .key-input{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:3px;padding:14px 16px;color:var(--atext);margin-bottom:12px;}
 .key-input:focus{border-color:var(--gold);}
-.key-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:3px;padding:15px;font-weight:700;cursor:pointer;}
+button,.btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:3px;padding:15px;font-weight:700;cursor:pointer;font-size:14px;}
+.sbtn{background:var(--gold-d);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:8px 16px;font-size:12px;color:var(--gold);cursor:pointer;width:auto;}
 .key-error{color:var(--red);font-size:13px;margin-top:12px;}
-.key-note{font-size:11px;color:var(--atext3);margin-top:18px;}
-#main-content{display:none;}#vue-e{background:var(--abg);min-height:100vh;padding:40px 20px;}#vue-p{background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;}
+#main{display:none;}#vue-e{background:var(--abg);min-height:100vh;padding:40px 20px;}#vue-p{background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;}
 .ew{max-width:680px;margin:auto;}.ehdr{display:flex;gap:14px;margin-bottom:32px;}.elogo{width:44px;height:44px;border-radius:50%;background:var(--gold-d);border:1.5px solid rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;color:var(--gold);}
 .etitle{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--atext);}.esub{font-size:10px;color:var(--atext2);}
 .etabs{display:flex;gap:3px;background:var(--as2);border-radius:8px;padding:3px;width:fit-content;margin-bottom:20px;}
@@ -24,21 +24,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--abg);}
 .efg{margin-bottom:12px;}.efl{font-size:10px;color:var(--atext3);display:block;margin-bottom:6px;}
 .efi{width:100%;background:var(--abg);border:1.5px solid var(--aborder2);border-radius:8px;padding:10px 12px;color:var(--atext);}
 .efi:focus{border-color:var(--gold);}.efh{font-size:11px;color:var(--atext3);margin-top:4px;}
-.ebtn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--abg);border:none;border-radius:8px;padding:14px;font-weight:700;cursor:pointer;}
 .lbox{background:var(--abg);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:18px;margin-top:14px;display:none;}
 .lbox.on{display:block;}.lval{font-size:12px;color:var(--atext2);word-break:break-all;padding:10px;background:var(--as1);border-radius:8px;margin-bottom:10px;font-family:monospace;}
-.lcopy{background:var(--gold-d);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:8px 16px;font-size:12px;color:var(--gold);cursor:pointer;}
 .estats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:14px;}
 .estat{background:var(--as1);border:1px solid var(--aborder);border-radius:10px;padding:14px;}
 .estatn{font-size:26px;font-weight:700;color:var(--atext);}.estatl{font-size:10px;color:var(--atext2);}
 .etw{background:var(--as1);border:1px solid var(--aborder);border-radius:12px;overflow-x:auto;}
 table{width:100%;border-collapse:collapse;}th,td{padding:10px 13px;text-align:left;font-size:12px;color:var(--atext2);border-bottom:1px solid #111118;}
 .bdg{display:inline-flex;font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;border:1px solid rgba(201,168,76,.4);color:var(--gold);}
-.eexp{background:var(--as1);border:1px solid var(--aborder);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--gold);cursor:pointer;}
 .pcard{background:var(--card);border-radius:20px;max-width:500px;width:100%;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.08);}
 .pprog{height:3px;background:var(--border);}.pprogf{height:100%;background:var(--dark);width:0%;transition:width .5s;}
-.pscreen{display:none;}.pscreen.on{display:block;animation:fadeUp .3s;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.pscreen{display:none;}.pscreen.on{display:block;animation:fadeUp .3s;}@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .pintro{padding:44px 36px 38px;}.ptag{font-size:10px;letter-spacing:.2em;color:var(--muted);margin-bottom:18px;}
 .ptitle{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,28px);color:var(--dark);margin-bottom:12px;}
 .pdesc{font-size:13px;color:var(--mid);margin-bottom:24px;}
@@ -46,7 +42,7 @@ table{width:100%;border-collapse:collapse;}th,td{padding:10px 13px;text-align:le
 .pofferlbl{font-size:10px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px;}
 .pofferrow{display:flex;gap:10px;font-size:13px;color:var(--mid);margin-bottom:6px;}
 .pdot{width:5px;height:5px;background:var(--gold);border-radius:50%;margin-top:6px;}
-.pbtn{width:100%;background:var(--dark);color:#fff;border:none;border-radius:10px;padding:15px;font-weight:600;cursor:pointer;}
+.pbtn{display:block;width:100%;background:var(--dark);color:#fff;border:none;border-radius:10px;padding:15px;font-weight:600;cursor:pointer;text-align:center;}
 .pnote{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;}
 .pqblock{padding:28px 36px 34px;}.pqmeta{display:flex;justify-content:space-between;margin-bottom:20px;}
 .pqnum{font-size:10px;color:var(--muted);}.pqdots{display:flex;gap:5px;}
@@ -62,14 +58,15 @@ table{width:100%;border-collapse:collapse;}th,td{padding:10px 13px;text-align:le
 .pnav{display:flex;justify-content:space-between;margin-top:22px;}
 .pbk{background:none;border:1.5px solid var(--border);border-radius:8px;padding:9px 16px;font-size:12px;color:var(--muted);cursor:pointer;}
 .pnx{background:var(--dark);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-weight:600;font-size:13px;cursor:pointer;opacity:.25;pointer-events:none;}
-.pnx.go{opacity:1;pointer-events:all;}
+.pnx.go{opacity:1;pointer-events:auto;}
 .peblock{padding:36px 36px 40px;}.peico{font-size:36px;margin-bottom:14px;}
 .petitle{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,23px);color:var(--dark);margin-bottom:8px;}
 .pesub{font-size:13px;color:var(--mid);margin-bottom:22px;}
 .pfield{width:100%;background:var(--soft);border:1.5px solid var(--border);border-radius:9px;padding:12px 14px;font-size:14px;margin-bottom:10px;}
 .pfield:focus{border-color:var(--dark);background:#fff;}
 .pprv{font-size:11px;color:var(--muted);text-align:center;margin-top:8px;}
-.pconfirm{padding:48px 36px;text-align:center;}.pcico{font-size:52px;margin-bottom:18px;}
+.pconfirm{padding:48px 36px;text-align:center;}
+.pcico{font-size:52px;margin-bottom:18px;}
 .pctitle{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,28px);color:var(--dark);margin-bottom:10px;}
 .pcsub{font-size:13px;color:var(--mid);margin-bottom:28px;}
 .pcbtn{display:block;background:var(--dark);color:#fff;border:none;border-radius:10px;padding:15px;text-align:center;text-decoration:none;cursor:pointer;width:100%;}
@@ -77,179 +74,64 @@ table{width:100%;border-collapse:collapse;}th,td{padding:10px 13px;text-align:le
 @media(max-width:560px){.pqblock,.pintro,.peblock,.pconfirm{padding-left:20px;padding-right:20px;}}
 </style></head>
 <body>
-<div id="key-screen"><div class="key-card"><div class="key-logo">Moment <em>Troc</em></div><div class="key-sub">Accès lead magnet</div><div class="key-label">Clé d'activation</div><input type="text" id="key-input" class="key-input" placeholder="Ex: MKB2000-2022A"><button id="key-btn" class="key-btn" onclick="activer()">Activer →</button><div id="key-error" class="key-error"></div><div class="key-note">Clé personnelle unique.</div></div></div>
-<div id="main-content"></div>
+<div class="key-screen" id="ks"><div class="key-card"><div class="key-logo">Moment <em>Troc</em></div><div class="key-sub">Profilage acheteur</div><div class="key-label">Clé d'activation</div><input type="text" id="k" class="key-input" placeholder="Ex: MKB2000-2022A"><button id="ba">Activer →</button><div id="ke" class="key-error"></div><div class="key-note">Clé personnelle unique.</div></div></div>
+<div id="main"></div>
 <script>
-// === LISTE DES 20 CLÉS ===
-const VALID_KEYS = ["MKB2000-2022A","MT-A1X9-KZ72","MT-B3W5-QP48","MT-C7R2-NL91","MT-D4M8-VS63","MT-E6J1-HT85","MT-F2K7-XB34","MT-G9P3-YC56","MT-H5N6-ZD17","MT-I8L4-WE29","MT-J1Q9-RF43","MT-K3S7-UG68","MT-L6T2-MH15","MT-M4V8-JI92","MT-N7B1-OK37","MT-O2C5-PL84","MT-P9D3-QM56","MT-Q5F6-RN71","MT-R1G4-SO29","MT-S8H7-TK43"];
-
-// === QUESTIONS (7 + 1 méfiance) ===
-const QUESTIONS = [
-  {q:"Quand tu découvres quelque chose qui pourrait t'aider, tu fais quoi en premier ?",o:[
-    {t:"Je cherche des retours de gens qui l'ont testé.",s:{a:3}},{t:"Je calcule si l'investissement vaut le coup.",s:{b:3}},
-    {t:"Je compare les prix pour ne pas payer trop cher.",s:{c:3}},{t:"Je regarde qui l'utilise et si ça correspond à mon image.",s:{d:3}},
-    {t:"Je vérifie si c'est adapté à ma situation.",s:{e:3}},{t:"Je lis les conditions et cherche ce qui pourrait ne pas marcher.",s:{f:3}}]},
-  {q:"Quel est ton plus grand défi ?",o:[
-    {t:"Je ne sais pas par où commencer.",s:{a:3}},{t:"Les résultats ne sont pas proportionnels.",s:{b:3}},
-    {t:"Je dépense pour des promesses non tenues.",s:{c:3}},{t:"J'ai du mal à me différencier.",s:{d:3}},
-    {t:"Les solutions sont trop génériques.",s:{e:3}},{t:"J'ai du mal à refaire confiance.",s:{f:3}}]},
-  {q:"Entre deux contenus gratuits, lequel tu ouvres ?",o:[
-    {t:"Celui avec un plan clair.",s:{a:3}},{t:"Celui avec des résultats chiffrés.",s:{b:3}},
-    {t:"Celui qui compare les options.",s:{c:3}},{t:"Celui bien présenté.",s:{d:3}},
-    {t:"Celui qui parle de ma situation.",s:{e:3}},{t:"Celui qui explique ce qui ne marche pas.",s:{f:3}}]},
-  {q:"Quand tu es satisfait d'un achat, tu dis ?",o:[
-    {t:"C'était simple et ça a marché.",s:{a:3}},{t:"C'est rentable.",s:{b:3}},
-    {t:"Excellent rapport qualité-prix.",s:{c:3}},{t:"Ça m'a aidé à me positionner.",s:{d:3}},
-    {t:"C'était fait pour moi.",s:{e:3}},{t:"Pas de mauvaise surprise.",s:{f:3}}]},
-  {q:"Face à une nouvelle opportunité, qu'est-ce qui peut te bloquer ?",o:[
-    {t:"Manque d'accompagnement.",s:{a:3}},{t:"Doute sur le ROI.",s:{b:3}},
-    {t:"Prix trop élevé.",s:{c:3}},{t:"Image pas adaptée.",s:{d:3}},
-    {t:"Pas personnalisé.",s:{e:3}},{t:"Peur d'être déçu.",s:{f:3}}]},
-  {q:"Comment tu te sens quand ça ne marche pas ?",o:[
-    {t:"Perdu, j'aurais eu besoin d'un guide.",s:{a:3}},{t:"Frustré, j'aurais dû mieux évaluer.",s:{b:3}},
-    {t:"En colère, argent gaspillé.",s:{c:3}},{t:"Gêné, je me suis laissé influencer.",s:{d:3}},
-    {t:"Déçu, ce n'était pas pour moi.",s:{e:3}},{t:"Méfiant, je sentais un problème.",s:{f:3}}]},
-  {q:"Quel message te donne envie d'agir ?",o:[
-    {t:"Suis ces 5 étapes.",s:{a:3}},{t:"Multiplie tes résultats.",s:{b:3}},
-    {t:"Meilleur rapport qualité-prix.",s:{c:3}},{t:"Rejoins les entrepreneurs qui ont réussi.",s:{d:3}},
-    {t:"Conçu pour toi.",s:{e:3}},{t:"Aucune surprise, tout est clair.",s:{f:3}}]},
-  {q:"Quel niveau de méfiance as-tu face aux offres en ligne ?",o:[
-    {t:"Faible – je fais confiance",m:"Faible"},{t:"Modéré – besoin de preuves",m:"Modéré"},
-    {t:"Élevé – garanties nécessaires",m:"Élevé"},{t:"Très élevé – déjà déçu",m:"Très élevé"}]}
+(function(){
+const K=["MKB2000-2022A","MT-A1X9-KZ72","MT-B3W5-QP48","MT-C7R2-NL91","MT-D4M8-VS63","MT-E6J1-HT85","MT-F2K7-XB34","MT-G9P3-YC56","MT-H5N6-ZD17","MT-I8L4-WE29","MT-J1Q9-RF43","MT-K3S7-UG68","MT-L6T2-MH15","MT-M4V8-JI92","MT-N7B1-OK37","MT-O2C5-PL84","MT-P9D3-QM56","MT-Q5F6-RN71","MT-R1G4-SO29","MT-S8H7-TK43"];
+const Q=[
+{q:"Quand tu découvres quelque chose qui pourrait t'aider, tu fais quoi en premier ?",o:[
+{t:"Je cherche des retours de gens qui l'ont testé.",s:{a:3}},{t:"Je calcule si l'investissement vaut le coup.",s:{b:3}},
+{t:"Je compare les prix pour ne pas payer trop cher.",s:{c:3}},{t:"Je regarde qui l'utilise et si ça correspond à mon image.",s:{d:3}},
+{t:"Je vérifie si c'est adapté à ma situation.",s:{e:3}},{t:"Je lis les conditions et cherche ce qui pourrait ne pas marcher.",s:{f:3}}]},
+{q:"Quel est ton plus grand défi ?",o:[
+{t:"Je ne sais pas par où commencer.",s:{a:3}},{t:"Les résultats ne sont pas proportionnels.",s:{b:3}},
+{t:"Je dépense pour des promesses non tenues.",s:{c:3}},{t:"J'ai du mal à me différencier.",s:{d:3}},
+{t:"Les solutions sont trop génériques.",s:{e:3}},{t:"J'ai du mal à refaire confiance.",s:{f:3}}]},
+{q:"Entre deux contenus gratuits, lequel tu ouvres ?",o:[
+{t:"Celui avec un plan clair.",s:{a:3}},{t:"Celui avec des résultats chiffrés.",s:{b:3}},
+{t:"Celui qui compare les options.",s:{c:3}},{t:"Celui bien présenté.",s:{d:3}},
+{t:"Celui qui parle de ma situation.",s:{e:3}},{t:"Celui qui explique ce qui ne marche pas.",s:{f:3}}]},
+{q:"Quand tu es satisfait d'un achat, tu dis ?",o:[
+{t:"C'était simple et ça a marché.",s:{a:3}},{t:"C'est rentable.",s:{b:3}},
+{t:"Excellent rapport qualité-prix.",s:{c:3}},{t:"Ça m'a aidé à me positionner.",s:{d:3}},
+{t:"C'était fait pour moi.",s:{e:3}},{t:"Pas de mauvaise surprise.",s:{f:3}}]},
+{q:"Face à une nouvelle opportunité, qu'est-ce qui peut te bloquer ?",o:[
+{t:"Manque d'accompagnement.",s:{a:3}},{t:"Doute sur le ROI.",s:{b:3}},
+{t:"Prix trop élevé.",s:{c:3}},{t:"Image pas adaptée.",s:{d:3}},
+{t:"Pas personnalisé.",s:{e:3}},{t:"Peur d'être déçu.",s:{f:3}}]},
+{q:"Comment tu te sens quand ça ne marche pas ?",o:[
+{t:"Perdu, j'aurais eu besoin d'un guide.",s:{a:3}},{t:"Frustré, j'aurais dû mieux évaluer.",s:{b:3}},
+{t:"En colère, argent gaspillé.",s:{c:3}},{t:"Gêné, je me suis laissé influencer.",s:{d:3}},
+{t:"Déçu, ce n'était pas pour moi.",s:{e:3}},{t:"Méfiant, je sentais un problème.",s:{f:3}}]},
+{q:"Quel message te donne envie d'agir ?",o:[
+{t:"Suis ces 5 étapes.",s:{a:3}},{t:"Multiplie tes résultats.",s:{b:3}},
+{t:"Meilleur rapport qualité-prix.",s:{c:3}},{t:"Rejoins les entrepreneurs qui ont réussi.",s:{d:3}},
+{t:"Conçu pour toi.",s:{e:3}},{t:"Aucune surprise, tout est clair.",s:{f:3}}]},
+{q:"Quel niveau de méfiance as-tu face aux offres en ligne ?",o:[
+{t:"Faible – je fais confiance",m:"Faible"},{t:"Modéré – besoin de preuves",m:"Modéré"},
+{t:"Élevé – garanties nécessaires",m:"Élevé"},{t:"Très élevé – déjà déçu",m:"Très élevé"}]}
 ];
-
-let reponses = {};
-let mefiance = "";
-
-function $(id) { return document.getElementById(id); }
-function escapeHtml(s) { return String(s||'').replace(/[&<>"']/g, function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);}); }
-function getConfig() { try { return JSON.parse(localStorage.getItem("mt_config")||"{}"); } catch(e){ return {}; } }
-function getLeads() { try { return JSON.parse(localStorage.getItem("mt_leads")||"[]"); } catch(e){ return []; } }
-function saveLeads(leads) { localStorage.setItem("mt_leads", JSON.stringify(leads)); }
-
-// === ACTIVATION ===
-function activer() {
-  let key = $("key-input").value.trim().toUpperCase();
-  let errDiv = $("key-error");
-  errDiv.innerText = "";
-  if (!key) { errDiv.innerText = "Entrez une clé."; return; }
-  if (VALID_KEYS.includes(key)) {
-    $("key-screen").style.display = "none";
-    $("main-content").style.display = "block";
-    renderEntrepreneur();
-  } else {
-    errDiv.innerText = "Clé invalide.";
-  }
-}
-
-// === AFFICHAGE ENTREPRENEUR ===
-function renderEntrepreneur() {
-  let cfg = getConfig();
-  $("main-content").innerHTML = `
-    <div id="vue-e"><div class="ew">
-      <div class="ehdr"><div class="elogo">MT</div><div><div class="etitle">Moment Troc</div><div class="esub">Espace entrepreneur</div></div></div>
-      <div class="etabs"><button class="etab on" id="tab-cfg">⚙️ Config</button><button class="etab" id="tab-leads">📊 Leads</button></div>
-      <div id="tcfg">
-        <div class="ecard"><div class="ecttl">Configuration</div>
-          <div class="efg"><label class="efl">Titre de l'offre</label><input class="efi" id="ctitre" value="${escapeHtml(cfg.titre||'')}"></div>
-          <div class="efg"><label class="efl">Nom du lead magnet</label><input class="efi" id="ccadeau" value="${escapeHtml(cfg.cadeau||'')}"></div>
-          <div class="efg"><label class="efl">Lien du lead magnet</label><input class="efi" id="clien" value="${escapeHtml(cfg.lien||'')}"></div>
-          <div class="efg"><label class="efl">Ton endpoint Formspree (pour recevoir les leads par email)</label><input class="efi" id="cformspree" placeholder="https://formspree.io/f/xxxx" value="${escapeHtml(cfg.formspree||'')}"><div class="efh">Crée un compte sur formspree.io, crée un formulaire, copie l’URL complète.</div></div>
-        </div>
-        <button class="ebtn" id="btn-save">💾 Sauvegarder et générer le lien prospect</button>
-        <div class="lbox" id="lbox"><div class="lval" id="lval"></div><button class="lcopy" id="lcbtn">📋 Copier le lien</button><div class="lnote">Partage ce lien (il contient ?prospect).</div></div>
-      </div>
-      <div id="tleads" style="display:none;"><div class="estats" id="estats"></div><div class="ecard" style="display:flex;justify-content:space-between;"><div class="ecttl">Leads reçus</div><button class="eexp" id="btn-export">⬇️ Exporter CSV</button></div><div class="etw"><table><thead><tr><th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Pays</th><th>Date</th></tr></thead><tbody id="etbody"></tbody></table></div></div>
-    </div></div>
-  `;
-  $("tab-cfg").onclick = () => eTab("cfg");
-  $("tab-leads").onclick = () => eTab("leads");
-  $("btn-save").onclick = sauvegarder;
-  $("btn-export").onclick = exportCSV;
-  eTab("cfg");
-}
-
-function eTab(tab) {
-  document.querySelectorAll(".etab").forEach(b => b.classList.remove("on"));
-  if (tab === "cfg") {
-    $("tab-cfg").classList.add("on");
-    $("tcfg").style.display = "block";
-    $("tleads").style.display = "none";
-  } else {
-    $("tab-leads").classList.add("on");
-    $("tcfg").style.display = "none";
-    $("tleads").style.display = "block";
-    chargerLeads();
-  }
-}
-
-function sauvegarder() {
-  let config = {
-    titre: $("ctitre").value,
-    cadeau: $("ccadeau").value,
-    lien: $("clien").value,
-    formspree: $("cformspree").value
-  };
-  localStorage.setItem("mt_config", JSON.stringify(config));
-  let url = location.href.split("?")[0] + "?prospect";
-  $("lval").innerText = url;
-  $("lbox").classList.add("on");
-  $("lcbtn").onclick = () => {
-    navigator.clipboard.writeText(url);
-    $("lcbtn").innerText = "✓ Copié !";
-    setTimeout(() => $("lcbtn").innerText = "📋 Copier le lien", 2000);
-  };
-}
-
-function chargerLeads() {
-  let leads = getLeads();
-  let tbody = $("etbody");
-  let statsDiv = $("estats");
-  if (!tbody) return;
-  if (!leads.length) {
-    tbody.innerHTML = '<tr><td colspan="6">Aucun lead pour l\'instant.</td></tr>';
-    if (statsDiv) statsDiv.innerHTML = "";
-    return;
-  }
-  let stats = {};
-  tbody.innerHTML = "";
-  leads.forEach(l => {
-    let p = l.profil || "Inconnu";
-    stats[p] = (stats[p]||0)+1;
-    tbody.innerHTML += `<tr><td>${escapeHtml(l.prenom)}</td><td>${escapeHtml(l.email)}</td><td><span class="bdg">${escapeHtml(p)}</span></td><td>${escapeHtml(l.mefiance)}</td><td>${escapeHtml(l.pays)}</td><td>${new Date(l.date).toLocaleDateString()}</td></tr>`;
-  });
-  if (statsDiv) {
-    statsDiv.innerHTML = Object.entries(stats).map(e => `<div class="estat"><div class="estatn">${e[1]}</div><div class="estatl">${e[0]}</div></div>`).join("");
-  }
-}
-
-function exportCSV() {
-  let leads = getLeads();
-  if (!leads.length) { alert("Aucun lead à exporter."); return; }
-  let csv = "Prénom,Email,Profil,Méfiance,Pays,Date\n";
-  leads.forEach(l => { csv += `"${l.prenom}","${l.email}","${l.profil}","${l.mefiance}","${l.pays}","${l.date}"\n`; });
-  let a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob([csv]));
-  a.download = "leads.csv";
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-
-// === PARTIE PROSPECT (appelée si ?prospect) ===
-function renderProspect() {
-  let cfg = getConfig();
-  let titre = cfg.titre || "Réponds à quelques questions";
-  let cadeau = cfg.cadeau || "ton lead magnet";
-  let dots = Array.from({length:8}, (_,j) => `<div class='pqdot' id='d${j}'></div>`).join("");
-  let qHtml = "";
-  for (let i=0; i<7; i++) {
-    let q = QUESTIONS[i];
-    let opts = q.o.map((o,oi) => `<div class='popt' data-q='${i}' data-oi='${oi}' data-t='${escapeHtml(o.t)}'><div class='popto'></div><div class='poptt'>${escapeHtml(o.t)}</div></div>`).join("");
-    qHtml += `<div class='pscreen' id='ps-q${i}'><div class='pqblock'><div class='pqmeta'><span class='pqnum'>Question ${i+1}/8</span><div class='pqdots'>${dots}</div></div><div class='pqtxt'>${escapeHtml(q.q)}</div><div class='popts'>${opts}</div><div class='pnav'><button class='pbk' data-nav='${i}' data-dir='-1'>${i===0?"Annuler":"← Retour"}</button><button class='pnx' id='pnx${i}' data-nav='${i}' data-dir='1'>Suivant →</button></div></div></div>`;
-  }
-  let mefOpts = QUESTIONS[7].o.map((o,oi) => `<div class='popt' data-mef='1' data-oi='${oi}' data-t='${escapeHtml(o.t)}'><div class='popto'></div><div class='poptt'>${escapeHtml(o.t)}</div></div>`).join("");
-  $("main-content").innerHTML = `
-    <div id='vue-p'><div class='pcard'><div class='pprog'><div class='pprogf' id='progf'></div></div>
-    <div class='pscreen on' id='ps-intro'><div class='pintro'><div class='ptag'>Accès gratuit</div><div class='ptitle'>${escapeHtml(titre)}</div><div class='pdesc'>8 questions rapides pour obtenir ton accès.</div><div class='poffer'><div class='pofferlbl'>Ce que tu reçois</div><div class='pofferrow'><div class='pdot'></div><div><strong>${escapeHtml(cadeau)}</strong></div></div></div><button class='pbtn' id='btn-start'>Commencer →</button><div class='pnote'>Gratuit · 2 minutes</div></div></div>
-    ${qHtml}
-    <div class='pscreen' id='ps-mef'><div class='pqblock'><div class='pqmeta'><span class='pqnum'>Dernière question</span><div class='pqdots'>${dots}</div></div><div class='pqtxt'>${escapeHtml(QUESTIONS[7].q)}</div><div class='popts
+let r={},mf="";function $(id){return document.getElementById(id);}
+function esc(s){return String(s||'').replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];});}
+function getC(){try{return JSON.parse(localStorage.getItem("mt_c")||"{}");}catch(e){return{};}}
+function getL(){try{return JSON.parse(localStorage.getItem("mt_l")||"[]");}catch(e){return[];}}
+function saveL(l){localStorage.setItem("mt_l",JSON.stringify(l));}
+document.getElementById("ba").onclick=()=>{let key=document.getElementById("k").value.trim().toUpperCase(),err=$("ke");err.innerText="";if(!key)err.innerText="Entrez une clé.";else if(K.includes(key)){$("ks").style.display="none";$("main").style.display="block";renderE();}else err.innerText="Clé invalide.";};
+function renderE(){let c=getC();$("main").innerHTML=`<div id="vue-e"><div class="ew"><div class="ehdr"><div class="elogo">MT</div><div><div class="etitle">Moment Troc</div><div class="esub">Espace entrepreneur</div></div></div><div class="etabs"><button class="etab on" id="tc">⚙️ Config</button><button class="etab" id="tl">📊 Leads</button></div><div id="tcfg"><div class="ecard"><div class="ecttl">Configuration</div><div class="efg"><label class="efl">Titre offre</label><input class="efi" id="ct" value="${esc(c.titre||'')}"></div><div class="efg"><label class="efl">Lead magnet</label><input class="efi" id="cc" value="${esc(c.cadeau||'')}"></div><div class="efg"><label class="efl">Lien lead magnet</label><input class="efi" id="cl" value="${esc(c.lien||'')}"></div><div class="efg"><label class="efl">Niche / produit</label><input class="efi" id="cn" value="${esc(c.niche||'')}"></div><div class="efg"><label class="efl">Endpoint Formspree</label><input class="efi" id="cf" placeholder="https://formspree.io/f/xxxx" value="${esc(c.formspree||'')}"></div></div><button id="save">💾 Sauvegarder et générer lien</button><div class="lbox" id="lbox"><div class="lval" id="lval"></div><button class="sbtn" id="lc">📋 Copier lien</button></div></div><div id="tleads" style="display:none;"><div class="estats" id="estats"></div><div class="ecard" style="display:flex;justify-content:space-between;"><div class="ecttl">Leads</div><button class="sbtn" id="exp">⬇️ CSV</button></div><div class="etw"><table><thead>汽<th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Pays</th><th>Date</th></tr></thead><tbody id="etb"></tbody></table></div></div></div></div>`;
+document.getElementById("tc").onclick=()=>eTab("cfg");document.getElementById("tl").onclick=()=>eTab("leads");document.getElementById("save").onclick=()=>{let cfg={titre:$("ct").value,cadeau:$("cc").value,lien:$("cl").value,niche:$("cn").value,formspree:$("cf").value};localStorage.setItem("mt_c",JSON.stringify(cfg));let url=location.href.split("?")[0]+"?prospect";$("lval").innerText=url;$("lbox").classList.add("on");$("lc").onclick=()=>{navigator.clipboard.writeText(url);$("lc").innerText="✓ Copié !";setTimeout(()=>$("lc").innerText="📋 Copier lien",2000);};};document.getElementById("exp").onclick=()=>{let leads=getL();if(!leads.length){alert("Aucun lead");return;}let csv="Prénom,Email,Profil,Méfiance,Pays,Date\n";leads.forEach(l=>{csv+=`"${l.prenom}","${l.email}","${l.profil}","${l.mefiance}","${l.pays}","${l.date}"\n`;});let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv]));a.download="leads.csv";a.click();URL.revokeObjectURL(a.href);};eTab("cfg");}
+function eTab(t){document.querySelectorAll(".etab").forEach(e=>e.classList.remove("on"));if(t=="cfg"){$("tc").classList.add("on");$("tcfg").style.display="block";$("tleads").style.display="none";}else{$("tl").classList.add("on");$("tcfg").style.display="none";$("tleads").style.display="block";let leads=getL(),tb=$("etb"),st=$("estats");if(!tb)return;if(!leads.length){tb.innerHTML='<tr><td colspan="6">Aucun lead</td></tr>';if(st)st.innerHTML="";return;}let stats={};tb.innerHTML="";leads.forEach(l=>{let p=l.profil||"Inconnu";stats[p]=(stats[p]||0)+1;tb.innerHTML+=`<tr><td>${esc(l.prenom)}</td><td>${esc(l.email)}</td><td><span class="bdg">${esc(p)}</span></td><td>${esc(l.mefiance)}</td><td>${esc(l.pays)}</td><td>${new Date(l.date).toLocaleDateString()}</td></tr>`;});if(st)st.innerHTML=Object.entries(stats).map(([k,v])=>`<div class="estat"><div class="estatn">${v}</div><div class="estatl">${k}</div></div>`).join("");}}
+function renderP(){let c=getC(),titre=c.titre||"Réponds à quelques questions",cadeau=c.cadeau||"ton lead magnet",dots=Array.from({length:8},()=>"<div class='pqdot'></div>").join("");let qHtml="";for(let i=0;i<7;i++){let q=Q[i];let opts=q.o.map((o,oi)=>`<div class='popt' data-q='${i}' data-oi='${oi}' data-t='${esc(o.t)}'><div class='popto'></div><div class='poptt'>${esc(o.t)}</div></div>`).join("");qHtml+=`<div class='pscreen' id='pq${i}'><div class='pqblock'><div class='pqmeta'><span class='pqnum'>Question ${i+1}/8</span><div class='pqdots'>${dots}</div></div><div class='pqtxt'>${esc(q.q)}</div><div class='popts'>${opts}</div><div class='pnav'><button class='pbk' data-nav='${i}'>${i===0?"Annuler":"← Retour"}</button><button class='pnx' id='pnx${i}' data-nav='${i}'>Suivant →</button></div></div></div>`;}
+let mefOpts=Q[7].o.map((o,oi)=>`<div class='popt' data-mef='1' data-oi='${oi}' data-t='${esc(o.t)}'><div class='popto'></div><div class='poptt'>${esc(o.t)}</div></div>`).join("");$("main").innerHTML=`<div id='vue-p'><div class='pcard'><div class='pprog'><div class='pprogf' id='progf'></div></div><div class='pscreen on' id='pintro'><div class='pintro'><div class='ptag'>Accès gratuit</div><div class='ptitle'>${esc(titre)}</div><div class='pdesc'>8 questions rapides pour obtenir ton accès.</div><div class='poffer'><div class='pofferlbl'>Ce que tu reçois</div><div class='pofferrow'><div class='pdot'></div><div><strong>${esc(cadeau)}</strong></div></div></div><button class='pbtn' id='btn-start'>Commencer →</button><div class='pnote'>Gratuit · 2 min</div></div></div>${qHtml}<div class='pscreen' id='pmef'><div class='pqblock'><div class='pqmeta'><span class='pqnum'>Dernière question</span><div class='pqdots'>${dots}</div></div><div class='pqtxt'>${esc(Q[7].q)}</div><div class='popts'>${mefOpts}</div><div class='pnav'><button class='pbk' id='pbk-mef'>← Retour</button><button class='pnx' id='pnx-mef'>Continuer →</button></div></div></div><div class='pscreen' id='pemail'><div class='peblock'><div class='peico'>📧</div><div class='petitle'>Dernière étape</div><div class='pesub'>Ton prénom et email pour recevoir ton accès.</div><input class='pfield' id='pp' placeholder='Prénom'><input class='pfield' id='pe' placeholder='Email'><button class='pbtn' id='btn-sub'>Recevoir l'accès →</button><div class='pprv'>🔒 Confidentiel</div></div></div><div class='pscreen' id='pconfirm'><div class='pconfirm'><div class='pcico'>✅</div><div class='pctitle'>C'est fait !</div><div class='pcsub' id='pcsub'>Ton accès est prêt ci-dessous.</div><a href='#' class='pcbtn' id='pclien'>Accéder →</a><div class='pcnote'>Vérifie aussi tes emails.</div></div></div></div></div>`;
+$("btn-start").onclick=()=>{pShow("q0");pProgress(1);};$("btn-sub").onclick=pSoumettre;$("pbk-mef").onclick=()=>{pShow("q6");pProgress(7);};$("pnx-mef").onclick=()=>{if(mf){pShow("email");pProgress(8);}else alert("Sélectionne une réponse.");};
+document.querySelectorAll(".popt").forEach(el=>{el.onclick=function(){let qi=this.getAttribute("data-q"),isMef=this.getAttribute("data-mef"),t=this.getAttribute("data-t");if(isMef){document.querySelectorAll("[data-mef]").forEach(o=>o.classList.remove("on"));this.classList.add("on");mf=t;$("pnx-mef").classList.add("go");}else if(qi){let idx=parseInt(qi);document.querySelectorAll(`[data-q='${idx}']`).forEach(o=>o.classList.remove("on"));this.classList.add("on");r[idx]=t;$("pnx"+idx).classList.add("go");}}});document.querySelectorAll(".pbk[data-nav]").forEach(el=>{el.onclick=function(){let i=parseInt(this.getAttribute("data-nav"));if(i===0)pShow("intro");else pShow("q"+(i-1));pProgress(i);};});document.querySelectorAll(".pnx[data-nav]").forEach(el=>{el.onclick=function(){let i=parseInt(this.getAttribute("data-nav"));if(r[i]!==undefined){let n=i+1;if(n>=7){pShow("mef");pProgress(7.5);}else{pShow("q"+n);pProgress(n+1);}}else alert("Réponds à la question.");};});}
+function pShow(s){document.querySelectorAll(".pscreen").forEach(e=>e.classList.remove("on"));let el=document.getElementById(s.startsWith("q")?"pq"+s.slice(1):(s=="intro"?"pintro":(s=="mef"?"pmef":(s=="email"?"pemail":"pconfirm"))));if(el)el.classList.add("on");let c=parseInt(s.replace("q",""));if(!isNaN(c))document.querySelectorAll(".pqdot").forEach((d,i)=>d.classList.toggle("done",i<=c));else if(s=="intro")document.querySelectorAll(".pqdot").forEach(d=>d.classList.remove("done"));else if(s=="mef")document.querySelectorAll(".pqdot").forEach((d,i)=>d.classList.toggle("done",i<7));}
+function pProgress(step){let bar=$("progf");if(bar)bar.style.width=Math.round((step/10)*100)+"%";}
+function calcProfil(){let s={a:0,b:0,c:0,d:0,e:0,f:0};for(let i=0;i<7;i++){let rep=r[i];if(!rep)continue;let opt=Q[i].o.find(o=>o.t===rep);if(opt&&opt.s)for(let k in opt.s)s[k]+=opt.s[k];}let dom=Object.keys(s).reduce((a,b)=>s[a]>s[b]?a:b);let lab={a:"Automatiseur",b:"Optimiseur Valeur",c:"Optimiseur Prix",d:"Élévateur",e:"Libérateur",f:"Protecteur"};return lab[dom]||dom;}
+async function detectPays(){try{let r=await fetch("https://ipapi.co/country_name/");return (await r.text()).trim()||"France";}catch(e){return "France";}}
+async function pSoumettre(){let pn=$("pp").value.trim(),em=$("pe").value.trim();if(!pn||!em){alert("Prénom et email requis.");return;}if(!em.includes("@")){alert("Email invalide.");return;}if(!mf){alert("Réponds à la dernière question.");return;}let profil=calcProfil(),pays=await detectPays(),cfg=getC();let lead={prenom:pn,email:em,profil:profil,mefiance:mf,pays:pays,date:new Date().toISOString()};let leads=getL();leads.push(lead);saveL(leads);if(cfg.formspree&&cfg.formspree.includes("formspree.io")){fetch(cfg.formspree,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(lead)}).catch(e=>console.warn);}let adminLead={...lead,niche:cfg.niche||"Non renseignée"};fetch("https://formspree.io/f/mlgogblo",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(adminLead)}).catch(e=>console.warn);$("pcsub").innerHTML=`Ton accès à <strong>${esc(cfg.cadeau||"lead magnet")}</strong> est prêt.`;$("pclien").href=cfg.lien||"#";pShow("confirm");pProgress(10);}
+if(location.search.includes("prospect")){$("ks").style.display="none";$("main").style.display="block";renderP();}
+})();
+</script>
+</body>
+</html>
