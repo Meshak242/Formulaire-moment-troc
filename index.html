@@ -967,7 +967,7 @@
   var successCta = document.getElementById('success-cta');
 
   // ════════════════════════════════════
-  // FONCTIONS CONFIG & QUESTIONNAIRE (INCHANGÉES)
+  // FONCTIONS CONFIG & QUESTIONNAIRE
   // ════════════════════════════════════
   window.lancerFormulaire = function() {
     config.produit = cfgProduit.value.trim() || "Mon offre exclusive";
@@ -1020,9 +1020,10 @@
       html += '<div></div>';
     }
 
-    var nextDisabled = selectedOption ? '' : 'active';
+    // CORRECTION ICI : active uniquement si une option est sélectionnée
+    var nextActiveClass = selectedOption ? 'active' : '';
     var nextText = (currentIndex === QUESTIONS.length - 1) ? 'Terminer →' : 'Suivant →';
-    html += '<button class="nav-next ' + nextDisabled + '" id="nav-next">' + nextText + '</button>';
+    html += '<button class="nav-next ' + nextActiveClass + '" id="nav-next">' + nextText + '</button>';
     html += '</div></div>';
 
     questionContainer.innerHTML = html;
