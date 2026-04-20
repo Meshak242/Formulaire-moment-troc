@@ -640,7 +640,7 @@
 <!-- ════════════════════════════════════
      PAGE LICENCE
 ════════════════════════════════════ -->
-<div id="licence-page">
+<div id="licence-page" style="display: none;">
   <div class="licence-box">
     <div class="licence-title">Moment <span>Troc</span></div>
     <div class="licence-sub">Cet outil est protégé.<br>Saisis ta clé de licence pour continuer.</div>
@@ -710,7 +710,7 @@
 <!-- ════════════════════════════════════
      PAGE FORMULAIRE PROSPECT
 ════════════════════════════════════ -->
-<div id="form-page">
+<div id="form-page" style="display: none;">
   <div class="form-header">
     <div class="form-brand">Moment <span>Troc</span></div>
     <div class="progress-bar-wrap">
@@ -965,7 +965,7 @@
   // ════════════════════════════════════
   let currentIndex = 0;
   let answers = new Array(8).fill(null);
-  let config = {}; // Sera rempli soit par l'URL, soit par la génération
+  let config = {};
 
   const formPage = document.getElementById('form-page');
   const successPage = document.getElementById('success-page');
@@ -1005,22 +1005,18 @@
       image: cfgImage.value.trim() || "",
       formspree: cfgFormspree.value.trim() || ""
     };
-    // Sauvegarde dans la variable globale pour usage éventuel
     config = cfg;
 
-    // Met à jour les OG tags de la page admin (optionnel)
     const title = cfg.produit + " | Moment Troc";
     pageTitle.textContent = title;
     ogTitle.setAttribute('content', title);
     ogDesc.setAttribute('content', cfg.business);
     if (cfg.image) ogImage.setAttribute('content', cfg.image);
 
-    // Génère le lien avec paramètre encodé
     const baseUrl = window.location.origin + window.location.pathname;
     const encodedConfig = encodeURIComponent(JSON.stringify(cfg));
     const prospectUrl = `${baseUrl}?c=${encodedConfig}`;
 
-    // Affiche la zone avec le lien
     generatedInput.value = prospectUrl;
     generatedBox.style.display = 'block';
   }
@@ -1032,20 +1028,6 @@
     document.execCommand('copy');
     alert('Lien copié dans le presse-papiers !');
   });
-
-  // ════════════════════════════════════
-  // LANCEMENT DU QUESTIONNAIRE (appelé depuis l'URL ou manuellement)
-  // ════════════════════════════════════
-  function startQuestionnaire(cfg) {
-    config = cfg;
-    licencePage.style.display = 'none';
-    configPage.style.display = 'none';
-    formPage.style.display = 'block';
-    successPage.style.display = 'none';
-    currentIndex = 0;
-    answers = new Array(8).fill(null);
-    renderQuestion();
-  }
 
   // ════════════════════════════════════
   // RENDU DU QUESTIONNAIRE
@@ -1201,10 +1183,8 @@
   // ════════════════════════════════════
   const urlConfig = getConfigFromURL();
   if (urlConfig) {
-    // Mode prospect : on lance directement le questionnaire
-    startQuestionnaire(urlConfig);
+    startQuestionnaireWithConfig(urlConfig);
   } else {
-    // Mode admin : on vérifie la licence stockée ou on affiche la page licence
     checkStoredLicence();
   }
 
