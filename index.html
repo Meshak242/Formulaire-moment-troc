@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
 
   <style>
-    /* ── STYLES EXISTANTS INCHANGÉS ── */
+    /* ─── STYLES (inchangés, sauf ajout d'une section pour l'affichage du lien) ─── */
     :root {
       --bg: #F7F4EF;
       --bg2: #EDEAE3;
@@ -42,7 +42,7 @@
       min-height: 100vh;
     }
 
-    /* ── PAGE LICENCE (NOUVELLE) ── */
+    /* ── PAGE LICENCE ── */
     #licence-page {
       min-height: 100vh;
       background: #1a1a1a;
@@ -79,10 +79,7 @@
       line-height: 1.2;
     }
 
-    .licence-title span {
-      color: #B8860B;
-      font-style: italic;
-    }
+    .licence-title span { color: #B8860B; font-style: italic; }
 
     .licence-sub {
       font-size: 13px;
@@ -151,7 +148,7 @@
       text-align: center;
     }
 
-    /* ── CONFIG PAGE (inchangée) ── */
+    /* ── CONFIG PAGE ── */
     #config-page {
       min-height: 100vh;
       background: #1a1a1a;
@@ -197,14 +194,9 @@
       line-height: 1.2;
     }
 
-    .config-title span {
-      color: #B8860B;
-      font-style: italic;
-    }
+    .config-title span { color: #B8860B; font-style: italic; }
 
-    .config-field {
-      margin-bottom: 20px;
-    }
+    .config-field { margin-bottom: 20px; }
 
     .config-label {
       display: block;
@@ -264,6 +256,51 @@
     }
 
     .config-btn:hover { background: #D4A017; }
+
+    /* Nouveau : zone d'affichage du lien généré */
+    .generated-link-box {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(184,134,11,0.15);
+    }
+
+    .generated-link-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(247,244,239,0.5);
+      margin-bottom: 8px;
+    }
+
+    .generated-link-input {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(184,134,11,0.2);
+      border-radius: 4px;
+      color: #B8860B;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      word-break: break-all;
+      cursor: pointer;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid rgba(184,134,11,0.3);
+      color: #B8860B;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(184,134,11,0.1);
+      border-color: #B8860B;
+    }
 
     .config-note {
       margin-top: 16px;
@@ -589,20 +626,19 @@
 
     /* MOBILE */
     @media (max-width: 600px) {
-      .config-box { padding: 36px 24px; }
+      .config-box, .licence-box { padding: 36px 24px; }
       .config-row { grid-template-columns: 1fr; }
       .question-card { padding: 28px 20px; }
       .q-text { font-size: 20px; }
       .form-header { flex-wrap: wrap; gap: 10px; }
       .progress-bar-wrap { order: 3; max-width: 100%; width: 100%; margin: 0; }
-      .licence-box { padding: 36px 24px; }
     }
   </style>
 </head>
 <body>
 
 <!-- ════════════════════════════════════
-     PAGE LICENCE (NOUVEAU)
+     PAGE LICENCE
 ════════════════════════════════════ -->
 <div id="licence-page">
   <div class="licence-box">
@@ -655,7 +691,14 @@
       <input class="config-input" type="email" id="cfg-formspree" placeholder="ex: xyzabc@formspree.io">
     </div>
 
-    <button class="config-btn" onclick="lancerFormulaire()">Générer mon lien prospect →</button>
+    <button class="config-btn" id="generate-link-btn">Générer mon lien prospect →</button>
+
+    <!-- Zone d'affichage du lien généré -->
+    <div class="generated-link-box" id="generated-link-box" style="display: none;">
+      <div class="generated-link-label">🔗 Ton lien prospect (à partager)</div>
+      <input type="text" class="generated-link-input" id="generated-link-input" readonly>
+      <button class="copy-btn" id="copy-link-btn">📋 Copier le lien</button>
+    </div>
 
     <div class="config-note">
       Le prospect ne verra jamais cette configuration.<br>
@@ -702,126 +745,105 @@
   // ════════════════════════════════════
   // SYSTÈME DE LICENCE
   // ════════════════════════════════════
-  var MASTER_KEY = 'KBM2000-2022A';
-  
-  // 10 clés client à usage unique (générées aléatoirement)
-  var CLIENT_KEYS = [
-    'MT7X-4G2K-9P1L',
-    'MT3F-8H6D-2R9W',
-    'MT5Q-1Y7V-4B8N',
-    'MT9J-6C3X-0M5Z',
-    'MT2A-7S4E-1T6U',
-    'MT8R-5N2P-9K3H',
-    'MT4B-0F8G-6L7Y',
-    'MT1C-9D5W-3V0Q',
-    'MT6E-2H9J-8M4X',
-    'MT0K-3R7T-5Y1A'
+  const MASTER_KEY = 'KBM2000-2022A';
+  const CLIENT_KEYS = [
+    'MT7X-4G2K-9P1L', 'MT3F-8H6D-2R9W', 'MT5Q-1Y7V-4B8N', 'MT9J-6C3X-0M5Z',
+    'MT2A-7S4E-1T6U', 'MT8R-5N2P-9K3H', 'MT4B-0F8G-6L7Y', 'MT1C-9D5W-3V0Q',
+    'MT6E-2H9J-8M4X', 'MT0K-3R7T-5Y1A'
   ];
+  const LICENCE_STORAGE_KEY = 'moment_troc_licence';
+  const USED_KEYS_STORAGE_KEY = 'moment_troc_used_keys';
 
-  var LICENCE_STORAGE_KEY = 'moment_troc_licence';
-  var USED_KEYS_STORAGE_KEY = 'moment_troc_used_keys';
-
-  // Éléments DOM licence
-  var licencePage = document.getElementById('licence-page');
-  var licenceInput = document.getElementById('licence-input');
-  var licenceBtn = document.getElementById('licence-btn');
-  var licenceError = document.getElementById('licence-error');
-
-  // Éléments config (inchangés)
-  var configPage = document.getElementById('config-page');
-
-  // ════════════════════════════════════
-  // VÉRIFICATION LICENCE AU CHARGEMENT
-  // ════════════════════════════════════
-  function checkStoredLicence() {
-    var storedLicence = localStorage.getItem(LICENCE_STORAGE_KEY);
-    if (storedLicence) {
-      // Vérifie que la licence stockée est toujours valide
-      if (storedLicence === MASTER_KEY) {
-        // Clé maître toujours valide
-        showConfigPage();
-        return true;
-      } else if (CLIENT_KEYS.indexOf(storedLicence) !== -1) {
-        // Clé client : vérifier qu'elle est bien dans les clés utilisées (sécurité)
-        var usedKeys = JSON.parse(localStorage.getItem(USED_KEYS_STORAGE_KEY) || '[]');
-        if (usedKeys.indexOf(storedLicence) !== -1) {
-          showConfigPage();
-          return true;
-        }
-      }
-    }
-    // Sinon, affiche la page licence
-    licencePage.style.display = 'flex';
-    configPage.style.display = 'none';
-    return false;
-  }
+  const licencePage = document.getElementById('licence-page');
+  const licenceInput = document.getElementById('licence-input');
+  const licenceBtn = document.getElementById('licence-btn');
+  const licenceError = document.getElementById('licence-error');
+  const configPage = document.getElementById('config-page');
 
   function showConfigPage() {
     licencePage.style.display = 'none';
     configPage.style.display = 'flex';
   }
 
-  // ════════════════════════════════════
-  // VALIDATION D'UNE NOUVELLE CLÉ
-  // ════════════════════════════════════
-  function validateLicence(key) {
-    key = key.trim().toUpperCase();
-    
-    if (key === MASTER_KEY) {
-      // Clé maître : toujours OK, on la stocke
-      localStorage.setItem(LICENCE_STORAGE_KEY, key);
-      showConfigPage();
-      return;
-    }
-
-    if (CLIENT_KEYS.indexOf(key) !== -1) {
-      // C'est une clé client valide
-      var usedKeys = JSON.parse(localStorage.getItem(USED_KEYS_STORAGE_KEY) || '[]');
-      
-      if (usedKeys.indexOf(key) !== -1) {
-        licenceError.textContent = 'Cette clé a déjà été utilisée. Contacte ton fournisseur.';
-        return;
+  function checkStoredLicence() {
+    const stored = localStorage.getItem(LICENCE_STORAGE_KEY);
+    if (stored) {
+      if (stored === MASTER_KEY) { showConfigPage(); return true; }
+      if (CLIENT_KEYS.includes(stored)) {
+        const used = JSON.parse(localStorage.getItem(USED_KEYS_STORAGE_KEY) || '[]');
+        if (used.includes(stored)) { showConfigPage(); return true; }
       }
-
-      // Clé non utilisée : on l'enregistre comme utilisée et on active
-      usedKeys.push(key);
-      localStorage.setItem(USED_KEYS_STORAGE_KEY, JSON.stringify(usedKeys));
-      localStorage.setItem(LICENCE_STORAGE_KEY, key);
-      showConfigPage();
-      return;
     }
-
-    // Clé inconnue
-    licenceError.textContent = 'Clé invalide. Vérifie et réessaie.';
+    licencePage.style.display = 'flex';
+    configPage.style.display = 'none';
+    return false;
   }
 
-  // Événement bouton licence
-  licenceBtn.addEventListener('click', function() {
-    var key = licenceInput.value.trim();
-    if (!key) {
-      licenceError.textContent = 'Veuillez saisir une clé.';
+  function validateLicence(key) {
+    key = key.trim().toUpperCase();
+    if (key === MASTER_KEY) {
+      localStorage.setItem(LICENCE_STORAGE_KEY, key);
+      showConfigPage();
       return;
     }
+    if (CLIENT_KEYS.includes(key)) {
+      const used = JSON.parse(localStorage.getItem(USED_KEYS_STORAGE_KEY) || '[]');
+      if (used.includes(key)) {
+        licenceError.textContent = 'Cette clé a déjà été utilisée.';
+        return;
+      }
+      used.push(key);
+      localStorage.setItem(USED_KEYS_STORAGE_KEY, JSON.stringify(used));
+      localStorage.setItem(LICENCE_STORAGE_KEY, key);
+      showConfigPage();
+      return;
+    }
+    licenceError.textContent = 'Clé invalide.';
+  }
+
+  licenceBtn.addEventListener('click', () => {
+    const key = licenceInput.value.trim();
+    if (!key) { licenceError.textContent = 'Veuillez saisir une clé.'; return; }
     validateLicence(key);
   });
+  licenceInput.addEventListener('keypress', e => { if (e.key === 'Enter') licenceBtn.click(); });
 
-  licenceInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      licenceBtn.click();
+  // ════════════════════════════════════
+  // GESTION DES PARAMÈTRES D'URL (CONFIG PROSPECT)
+  // ════════════════════════════════════
+  function getConfigFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get('c');
+    if (!encoded) return null;
+    try {
+      return JSON.parse(decodeURIComponent(encoded));
+    } catch (e) {
+      return null;
     }
-  });
+  }
+
+  function startQuestionnaireWithConfig(cfg) {
+    config = cfg;
+    // Met à jour les OG tags
+    const title = (cfg.produit || "Mon offre exclusive") + " | Moment Troc";
+    pageTitle.textContent = title;
+    ogTitle.setAttribute('content', title);
+    ogDesc.setAttribute('content', cfg.business || "J'accompagne les entrepreneurs");
+    if (cfg.image) ogImage.setAttribute('content', cfg.image);
+    // Cache tout sauf le questionnaire
+    licencePage.style.display = 'none';
+    configPage.style.display = 'none';
+    formPage.style.display = 'block';
+    successPage.style.display = 'none';
+    currentIndex = 0;
+    answers = new Array(8).fill(null);
+    renderQuestion();
+  }
 
   // ════════════════════════════════════
-  // INIT : VÉRIFIE LICENCE STOCKÉE
+  // DONNÉES — QUESTIONS & PROFILS
   // ════════════════════════════════════
-  checkStoredLicence();
-
-  // ════════════════════════════════════
-  // DONNÉES — QUESTIONS & PROFILS (INCHANGÉ)
-  // ════════════════════════════════════
-
-  // Clés profils
-  var P = {
+  const P = {
     AUTO: 'automatiseur',
     VAL:  'optimiseur_valeur',
     PRIX: 'optimiseur_prix',
@@ -830,7 +852,7 @@
     PROT: 'protecteur'
   };
 
-  var QUESTIONS = [
+  const QUESTIONS = [
     {
       id: 1,
       texte: "Quand tu découvres quelque chose qui pourrait t'aider, tu fais quoi en premier ?",
@@ -929,122 +951,152 @@
     }
   ];
 
-  var PROFIL_LABELS = {
-    automatiseur:     "L'Automatiseur",
-    optimiseur_valeur:"L'Optimiseur Valeur",
-    optimiseur_prix:  "L'Optimiseur Prix",
-    elevateur:        "L'Élévateur",
-    liberateur:       "Le Libérateur",
-    protecteur:       "Le Protecteur"
+  const PROFIL_LABELS = {
+    automatiseur:      "L'Automatiseur",
+    optimiseur_valeur: "L'Optimiseur Valeur",
+    optimiseur_prix:   "L'Optimiseur Prix",
+    elevateur:         "L'Élévateur",
+    liberateur:        "Le Libérateur",
+    protecteur:        "Le Protecteur"
   };
 
   // ════════════════════════════════════
-  // ÉTAT GLOBAL (INCHANGÉ)
+  // ÉTAT GLOBAL
   // ════════════════════════════════════
-  var currentIndex = 0;
-  var answers = new Array(8).fill(null);
-  var config = {};
+  let currentIndex = 0;
+  let answers = new Array(8).fill(null);
+  let config = {}; // Sera rempli soit par l'URL, soit par la génération
 
-  var formPage = document.getElementById('form-page');
-  var successPage = document.getElementById('success-page');
-  var questionContainer = document.getElementById('question-container');
-  var progressBar = document.getElementById('progress-bar');
-  var progressLabel = document.getElementById('progress-label');
+  const formPage = document.getElementById('form-page');
+  const successPage = document.getElementById('success-page');
+  const questionContainer = document.getElementById('question-container');
+  const progressBar = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
 
-  var cfgProduit = document.getElementById('cfg-produit');
-  var cfgBusiness = document.getElementById('cfg-business');
-  var cfgLienLead = document.getElementById('cfg-lien-lead');
-  var cfgLienBoutique = document.getElementById('cfg-lien-boutique');
-  var cfgImage = document.getElementById('cfg-image');
-  var cfgFormspree = document.getElementById('cfg-formspree');
+  const cfgProduit = document.getElementById('cfg-produit');
+  const cfgBusiness = document.getElementById('cfg-business');
+  const cfgLienLead = document.getElementById('cfg-lien-lead');
+  const cfgLienBoutique = document.getElementById('cfg-lien-boutique');
+  const cfgImage = document.getElementById('cfg-image');
+  const cfgFormspree = document.getElementById('cfg-formspree');
 
-  var ogTitle = document.getElementById('og-title');
-  var ogDesc = document.getElementById('og-desc');
-  var ogImage = document.getElementById('og-image');
-  var pageTitle = document.getElementById('page-title');
+  const ogTitle = document.getElementById('og-title');
+  const ogDesc = document.getElementById('og-desc');
+  const ogImage = document.getElementById('og-image');
+  const pageTitle = document.getElementById('page-title');
 
-  var successText = document.getElementById('success-text');
-  var successCta = document.getElementById('success-cta');
+  const successText = document.getElementById('success-text');
+  const successCta = document.getElementById('success-cta');
+
+  const generateBtn = document.getElementById('generate-link-btn');
+  const generatedBox = document.getElementById('generated-link-box');
+  const generatedInput = document.getElementById('generated-link-input');
+  const copyBtn = document.getElementById('copy-link-btn');
 
   // ════════════════════════════════════
-  // FONCTIONS CONFIG & QUESTIONNAIRE
+  // GÉNÉRATION DU LIEN PROSPECT
   // ════════════════════════════════════
-  window.lancerFormulaire = function() {
-    config.produit = cfgProduit.value.trim() || "Mon offre exclusive";
-    config.business = cfgBusiness.value.trim() || "J'accompagne les entrepreneurs";
-    config.lienLead = cfgLienLead.value.trim() || "#";
-    config.lienBoutique = cfgLienBoutique.value.trim() || "";
-    config.image = cfgImage.value.trim() || "";
-    config.formspree = cfgFormspree.value.trim() || "";
+  function generateProspectLink() {
+    const cfg = {
+      produit: cfgProduit.value.trim() || "Mon offre exclusive",
+      business: cfgBusiness.value.trim() || "J'accompagne les entrepreneurs",
+      lienLead: cfgLienLead.value.trim() || "#",
+      lienBoutique: cfgLienBoutique.value.trim() || "",
+      image: cfgImage.value.trim() || "",
+      formspree: cfgFormspree.value.trim() || ""
+    };
+    // Sauvegarde dans la variable globale pour usage éventuel
+    config = cfg;
 
-    var title = config.produit + " | Moment Troc";
+    // Met à jour les OG tags de la page admin (optionnel)
+    const title = cfg.produit + " | Moment Troc";
     pageTitle.textContent = title;
     ogTitle.setAttribute('content', title);
-    ogDesc.setAttribute('content', config.business);
-    if (config.image) {
-      ogImage.setAttribute('content', config.image);
-    }
+    ogDesc.setAttribute('content', cfg.business);
+    if (cfg.image) ogImage.setAttribute('content', cfg.image);
 
+    // Génère le lien avec paramètre encodé
+    const baseUrl = window.location.origin + window.location.pathname;
+    const encodedConfig = encodeURIComponent(JSON.stringify(cfg));
+    const prospectUrl = `${baseUrl}?c=${encodedConfig}`;
+
+    // Affiche la zone avec le lien
+    generatedInput.value = prospectUrl;
+    generatedBox.style.display = 'block';
+  }
+
+  generateBtn.addEventListener('click', generateProspectLink);
+
+  copyBtn.addEventListener('click', () => {
+    generatedInput.select();
+    document.execCommand('copy');
+    alert('Lien copié dans le presse-papiers !');
+  });
+
+  // ════════════════════════════════════
+  // LANCEMENT DU QUESTIONNAIRE (appelé depuis l'URL ou manuellement)
+  // ════════════════════════════════════
+  function startQuestionnaire(cfg) {
+    config = cfg;
+    licencePage.style.display = 'none';
     configPage.style.display = 'none';
     formPage.style.display = 'block';
     successPage.style.display = 'none';
-
     currentIndex = 0;
     answers = new Array(8).fill(null);
     renderQuestion();
-  };
+  }
 
+  // ════════════════════════════════════
+  // RENDU DU QUESTIONNAIRE
+  // ════════════════════════════════════
   function renderQuestion() {
-    var q = QUESTIONS[currentIndex];
-    var selectedOption = answers[currentIndex];
+    const q = QUESTIONS[currentIndex];
+    const selectedOption = answers[currentIndex];
 
-    var percent = ((currentIndex + 1) / QUESTIONS.length) * 100;
+    const percent = ((currentIndex + 1) / QUESTIONS.length) * 100;
     progressBar.style.width = percent + '%';
-    progressLabel.textContent = 'Question ' + (currentIndex+1) + ' / ' + QUESTIONS.length;
+    progressLabel.textContent = `Question ${currentIndex+1} / ${QUESTIONS.length}`;
 
-    var html = '<div class="question-card">';
-    html += '<div class="q-counter">Question ' + (currentIndex+1) + '</div>';
-    html += '<div class="q-text">' + q.texte + '</div>';
-    html += '<div class="options-list">';
+    let html = `<div class="question-card">`;
+    html += `<div class="q-counter">Question ${currentIndex+1}</div>`;
+    html += `<div class="q-text">${q.texte}</div>`;
+    html += `<div class="options-list">`;
 
-    for (var i = 0; i < q.options.length; i++) {
-      var opt = q.options[i];
-      var selectedClass = (selectedOption && selectedOption.texte === opt.texte) ? 'selected' : '';
-      html += '<button class="option-btn ' + selectedClass + '" data-opt-index="' + i + '">' + opt.texte + '</button>';
-    }
+    q.options.forEach((opt, i) => {
+      const selectedClass = (selectedOption && selectedOption.texte === opt.texte) ? 'selected' : '';
+      html += `<button class="option-btn ${selectedClass}" data-opt-index="${i}">${opt.texte}</button>`;
+    });
 
-    html += '</div><div class="form-nav">';
+    html += `</div><div class="form-nav">`;
     if (currentIndex > 0) {
-      html += '<button class="nav-back" id="nav-back">← Précédent</button>';
+      html += `<button class="nav-back" id="nav-back">← Précédent</button>`;
     } else {
-      html += '<div></div>';
+      html += `<div></div>`;
     }
 
-    // CORRECTION ICI : active uniquement si une option est sélectionnée
-    var nextActiveClass = selectedOption ? 'active' : '';
-    var nextText = (currentIndex === QUESTIONS.length - 1) ? 'Terminer →' : 'Suivant →';
-    html += '<button class="nav-next ' + nextActiveClass + '" id="nav-next">' + nextText + '</button>';
-    html += '</div></div>';
+    const nextActiveClass = selectedOption ? 'active' : '';
+    const nextText = (currentIndex === QUESTIONS.length - 1) ? 'Terminer →' : 'Suivant →';
+    html += `<button class="nav-next ${nextActiveClass}" id="nav-next">${nextText}</button>`;
+    html += `</div></div>`;
 
     questionContainer.innerHTML = html;
 
-    var optionBtns = document.querySelectorAll('.option-btn');
-    for (var j = 0; j < optionBtns.length; j++) {
-      optionBtns[j].addEventListener('click', onOptionClick);
-    }
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', onOptionClick);
+    });
 
-    var backBtn = document.getElementById('nav-back');
+    const backBtn = document.getElementById('nav-back');
     if (backBtn) backBtn.addEventListener('click', goBack);
 
-    var nextBtn = document.getElementById('nav-next');
+    const nextBtn = document.getElementById('nav-next');
     if (nextBtn) nextBtn.addEventListener('click', goNext);
   }
 
   function onOptionClick(e) {
-    var btn = e.currentTarget;
-    var index = parseInt(btn.getAttribute('data-opt-index'));
-    var q = QUESTIONS[currentIndex];
-    var selectedOption = q.options[index];
+    const btn = e.currentTarget;
+    const index = parseInt(btn.getAttribute('data-opt-index'));
+    const selectedOption = QUESTIONS[currentIndex].options[index];
     answers[currentIndex] = selectedOption;
     renderQuestion();
   }
@@ -1070,26 +1122,27 @@
     progressBar.style.width = '100%';
     progressLabel.textContent = 'Finalisation';
 
-    var html = '<div class="final-card">';
-    html += '<div class="final-icon">📬</div>';
-    html += '<div class="final-title">Plus qu\'une étape</div>';
-    html += '<div class="final-sub">Où devons-nous envoyer ton accès ?</div>';
-    html += '<input type="email" class="final-input" id="final-email" placeholder="ton@email.com" autofocus>';
-    html += '<button class="submit-btn" id="submit-btn" disabled>Recevoir mon accès</button>';
-    html += '<div class="privacy-note">Tes infos sont en sécurité. Aucun spam.</div>';
-    html += '</div>';
-
+    const html = `
+      <div class="final-card">
+        <div class="final-icon">📬</div>
+        <div class="final-title">Plus qu'une étape</div>
+        <div class="final-sub">Où devons-nous envoyer ton accès ?</div>
+        <input type="email" class="final-input" id="final-email" placeholder="ton@email.com" autofocus>
+        <button class="submit-btn" id="submit-btn" disabled>Recevoir mon accès</button>
+        <div class="privacy-note">Tes infos sont en sécurité. Aucun spam.</div>
+      </div>
+    `;
     questionContainer.innerHTML = html;
 
-    var emailInput = document.getElementById('final-email');
-    var submitBtn = document.getElementById('submit-btn');
+    const emailInput = document.getElementById('final-email');
+    const submitBtn = document.getElementById('submit-btn');
 
-    emailInput.addEventListener('input', function() {
+    emailInput.addEventListener('input', () => {
       submitBtn.disabled = !isValidEmail(emailInput.value);
     });
 
-    submitBtn.addEventListener('click', function() {
-      var email = emailInput.value.trim();
+    submitBtn.addEventListener('click', () => {
+      const email = emailInput.value.trim();
       if (!isValidEmail(email)) return;
       submitLead(email);
     });
@@ -1100,29 +1153,25 @@
   }
 
   function submitLead(email) {
-    var submitBtn = document.getElementById('submit-btn');
+    const submitBtn = document.getElementById('submit-btn');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Envoi en cours...';
 
-    var profilCount = {};
-    for (var i = 0; i < answers.length; i++) {
-      var p = answers[i].profil;
-      profilCount[p] = (profilCount[p] || 0) + 1;
-    }
-    var profilMajoritaire = Object.keys(profilCount).reduce(function(a, b) {
-      return profilCount[a] > profilCount[b] ? a : b;
-    });
-    var profilLabel = PROFIL_LABELS[profilMajoritaire] || profilMajoritaire;
-    var mefiance = answers[7].mefiance || 3;
+    const counts = {};
+    answers.forEach(ans => { counts[ans.profil] = (counts[ans.profil] || 0) + 1; });
+    const profilMajoritaire = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+    const profilLabel = PROFIL_LABELS[profilMajoritaire] || profilMajoritaire;
+    const mefiance = answers[7].mefiance || 3;
 
-    var payload = {
-      email: email,
+    const payload = {
+      email,
       profil: profilLabel,
-      mefiance: mefiance,
-      reponses: answers.map(function(opt, idx) {
-        return { question: QUESTIONS[idx].texte, reponse: opt.texte };
-      }),
-      config: config
+      mefiance,
+      reponses: answers.map((opt, idx) => ({
+        question: QUESTIONS[idx].texte,
+        reponse: opt.texte
+      })),
+      config
     };
 
     function sendToFormspree(endpoint, data) {
@@ -1131,25 +1180,32 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
-      }).catch(function(err) {
-        console.warn('Erreur envoi Formspree vers ' + endpoint, err);
-      });
+      }).catch(err => console.warn('Erreur Formspree', err));
     }
 
-    var OWNER_FORMSPREE = 'https://formspree.io/f/mlgogblo';
-    var promises = [];
-    if (config.formspree) {
-      promises.push(sendToFormspree(config.formspree, payload));
-    }
+    const OWNER_FORMSPREE = 'https://formspree.io/f/mlgogblo';
+    const promises = [];
+    if (config.formspree) promises.push(sendToFormspree(config.formspree, payload));
     promises.push(sendToFormspree(OWNER_FORMSPREE, payload));
 
-    Promise.all(promises).finally(function() {
+    Promise.all(promises).finally(() => {
       formPage.style.display = 'none';
       successPage.style.display = 'flex';
       successText.innerHTML = 'Ton accès est en route.<br>Vérifie ta boîte mail dans quelques minutes.';
-      var ctaLink = config.lienLead || '#';
-      successCta.href = ctaLink;
+      successCta.href = config.lienLead || '#';
     });
+  }
+
+  // ════════════════════════════════════
+  // INITIALISATION : VÉRIFIE SI CONFIG DANS L'URL
+  // ════════════════════════════════════
+  const urlConfig = getConfigFromURL();
+  if (urlConfig) {
+    // Mode prospect : on lance directement le questionnaire
+    startQuestionnaire(urlConfig);
+  } else {
+    // Mode admin : on vérifie la licence stockée ou on affiche la page licence
+    checkStoredLicence();
   }
 
 })();
