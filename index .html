@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="page-title">Formulaire Moment Troc</title>
 
-  <!-- OG TAGS — générés dynamiquement par la config entrepreneur -->
   <meta property="og:title" id="og-title" content="Formulaire Moment Troc">
   <meta property="og:description" id="og-desc" content="8 questions rapides pour recevoir ton accès personnalisé.">
   <meta property="og:image" id="og-image" content="">
@@ -15,10 +14,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap">
 
   <style>
-    /* ─── STYLES INCHANGÉS (LICENCE, CONFIG, QUESTIONNAIRE, SUCCÈS) ─── */
     :root {
       --bg: #F7F4EF;
       --bg2: #EDEAE3;
@@ -65,7 +63,7 @@
     .licence-box::before {
       content:'';
       position:absolute;
-      top:0;left:0;right:0;
+      top:0; left:0; right:0;
       height:2px;
       background: linear-gradient(90deg, transparent, #B8860B, transparent);
     }
@@ -131,7 +129,6 @@
     }
 
     .licence-btn:hover { background: #D4A017; }
-    .licence-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .licence-error {
       margin-top: 12px;
@@ -152,14 +149,14 @@
     #config-page {
       min-height: 100vh;
       background: #1a1a1a;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       padding: 40px 20px;
     }
 
     .config-box {
-      max-width: 520px;
+      max-width: 560px;
       width: 100%;
       background: #222;
       border: 1px solid rgba(184,134,11,0.3);
@@ -171,13 +168,12 @@
     .config-box::before {
       content:'';
       position:absolute;
-      top:0;left:0;right:0;
+      top:0; left:0; right:0;
       height:2px;
       background: linear-gradient(90deg, transparent, #B8860B, transparent);
     }
 
     .config-eyebrow {
-      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 4px;
       text-transform: uppercase;
@@ -239,6 +235,40 @@
       gap: 12px;
     }
 
+    /* Redirection choice */
+    .redirect-choice {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .redirect-opt {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(184,134,11,0.2);
+      border-radius: 4px;
+      padding: 12px 14px;
+      cursor: pointer;
+      text-align: center;
+      color: rgba(247,244,239,0.4);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .redirect-opt:hover { border-color: rgba(184,134,11,0.5); color: rgba(247,244,239,0.7); }
+
+    .redirect-opt.selected {
+      border-color: #B8860B;
+      background: rgba(184,134,11,0.1);
+      color: #D4A017;
+      font-weight: 500;
+    }
+
+    .redirect-link-field { margin-top: 12px; display: none; }
+    .redirect-link-field.visible { display: block; }
+
     .config-btn {
       width: 100%;
       padding: 16px;
@@ -256,6 +286,50 @@
     }
 
     .config-btn:hover { background: #D4A017; }
+
+    .generated-link-box {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(184,134,11,0.15);
+    }
+
+    .generated-link-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(247,244,239,0.5);
+      margin-bottom: 8px;
+    }
+
+    .generated-link-input {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(184,134,11,0.2);
+      border-radius: 4px;
+      color: #B8860B;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      word-break: break-all;
+      outline: none;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid rgba(184,134,11,0.3);
+      color: #B8860B;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(184,134,11,0.1);
+      border-color: #B8860B;
+    }
 
     .config-note {
       margin-top: 16px;
@@ -316,7 +390,6 @@
       padding: 48px 24px 80px;
     }
 
-    /* QUESTION CARD */
     .question-card {
       background: var(--white);
       border-radius: var(--radius);
@@ -347,7 +420,6 @@
       margin-bottom: 28px;
     }
 
-    /* OPTIONS */
     .options-list {
       display: flex;
       flex-direction: column;
@@ -392,7 +464,6 @@
       font-size: 16px;
     }
 
-    /* NAV */
     .form-nav {
       display: flex;
       justify-content: space-between;
@@ -486,6 +557,7 @@
       outline: none;
       margin-bottom: 12px;
       transition: border-color 0.3s;
+      text-align: left;
     }
 
     .final-input:focus { border-color: var(--gold); }
@@ -507,8 +579,7 @@
     }
 
     .submit-btn:hover { background: var(--gold); }
-    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .submit-btn:disabled:hover { background: var(--black); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; background: var(--black); }
 
     .privacy-note {
       margin-top: 12px;
@@ -583,6 +654,7 @@
     @media (max-width: 600px) {
       .config-box, .licence-box { padding: 36px 24px; }
       .config-row { grid-template-columns: 1fr; }
+      .redirect-choice { flex-direction: column; }
       .question-card { padding: 28px 20px; }
       .q-text { font-size: 20px; }
       .form-header { flex-wrap: wrap; gap: 10px; }
@@ -599,7 +671,6 @@
   <div class="licence-box">
     <div class="licence-title">Moment <span>Troc</span></div>
     <div class="licence-sub">Cet outil est protégé.<br>Saisis ta clé de licence pour continuer.</div>
-
     <input type="text" class="licence-input" id="licence-input" placeholder="XXXX-XXXX-XXXX" maxlength="20" autocomplete="off">
     <button class="licence-btn" id="licence-btn">Valider la licence →</button>
     <div class="licence-error" id="licence-error"></div>
@@ -610,14 +681,14 @@
 <!-- ════════════════════════════════════
      PAGE CONFIG ENTREPRENEUR
 ════════════════════════════════════ -->
-<div id="config-page" style="display: none;">
+<div id="config-page">
   <div class="config-box">
     <div class="config-eyebrow">Moment Troc</div>
     <div class="config-title">Configure ton<br><span>formulaire prospect</span></div>
 
     <div class="config-field">
       <label class="config-label">Nom de ton produit ou lead magnet</label>
-      <input class="config-input" type="text" id="cfg-produit" placeholder="Ex: Ebook Moment Troc, Masterclass Vente...">
+      <input class="config-input" type="text" id="cfg-produit" placeholder="Ex: Ebook Vente, Masterclass WhatsApp...">
     </div>
 
     <div class="config-field">
@@ -625,29 +696,37 @@
       <input class="config-input" type="text" id="cfg-business" placeholder="Ex: J'aide les freelances à vendre sur WhatsApp...">
     </div>
 
-    <div class="config-row">
-      <div class="config-field">
-        <label class="config-label">Lien du lead magnet <span class="opt">ou produit</span></label>
-        <input class="config-input" type="url" id="cfg-lien-lead" placeholder="https://...">
-      </div>
-      <div class="config-field">
-        <label class="config-label">Lien boutique <span class="opt">optionnel</span></label>
-        <input class="config-input" type="url" id="cfg-lien-boutique" placeholder="https://chariow.com/...">
-      </div>
+    <div class="config-field">
+      <label class="config-label">Image du produit <span class="opt">URL — pour le partage Facebook</span></label>
+      <input class="config-input" type="url" id="cfg-image" placeholder="https://ton-hebergeur.com/image.jpg">
     </div>
 
     <div class="config-field">
-      <label class="config-label">URL de l'image du produit <span class="opt">pour Facebook</span></label>
-      <input class="config-input" type="url" id="cfg-image" placeholder="https://ton-image-hebergee.com/image.jpg">
-    </div>
-
-    <!-- Champ Formspree utilisateur -->
-    <div class="config-field">
-      <label class="config-label">Email Formspree <span class="opt">pour recevoir les leads</span></label>
+      <label class="config-label">Email Formspree <span class="opt">pour recevoir tes leads</span></label>
       <input class="config-input" type="email" id="cfg-formspree" placeholder="ex: xyzabc@formspree.io">
     </div>
 
-    <button class="config-btn" onclick="lancerFormulaire()">Générer mon lien prospect →</button>
+    <div class="config-field">
+      <label class="config-label">Rediriger le prospect vers</label>
+      <div class="redirect-choice">
+        <div class="redirect-opt selected" id="opt-leadmagnet" data-val="leadmagnet">📥 Lead Magnet</div>
+        <div class="redirect-opt" id="opt-boutique" data-val="boutique">🛒 Boutique / Vente</div>
+      </div>
+      <div class="redirect-link-field visible" id="field-leadmagnet">
+        <input class="config-input" type="url" id="cfg-lien-lead" placeholder="https://lien-vers-ton-lead-magnet.com">
+      </div>
+      <div class="redirect-link-field" id="field-boutique">
+        <input class="config-input" type="url" id="cfg-lien-boutique" placeholder="https://chariow.com/ta-boutique">
+      </div>
+    </div>
+
+    <button class="config-btn" id="generate-link-btn">Générer mon lien prospect →</button>
+
+    <div class="generated-link-box" id="generated-link-box" style="display:none;">
+      <div class="generated-link-label">🔗 Ton lien prospect (à partager)</div>
+      <input type="text" class="generated-link-input" id="generated-link-input" readonly>
+      <button class="copy-btn" id="copy-link-btn">📋 Copier le lien</button>
+    </div>
 
     <div class="config-note">
       Le prospect ne verra jamais cette configuration.<br>
@@ -667,7 +746,6 @@
     </div>
     <div class="progress-label" id="progress-label">Question 1 / 8</div>
   </div>
-
   <div class="form-body">
     <div id="question-container"></div>
   </div>
@@ -676,7 +754,7 @@
 <!-- ════════════════════════════════════
      PAGE SUCCÈS
 ════════════════════════════════════ -->
-<div id="success-page" style="display:none;">
+<div id="success-page">
   <div class="success-box">
     <div class="success-icon">✦</div>
     <div class="success-title">C'est parti.</div>
@@ -691,398 +769,478 @@
 (function(){
   "use strict";
 
-  // ════════════════════════════════════
-  // SYSTÈME DE LICENCE
-  // ════════════════════════════════════
-  const MASTER_KEY = 'KBM2000-2022A';
+  // ════════════════════════════════
+  // CLÉS DE LICENCE
+  // ════════════════════════════════
+  const MASTER_KEY = 'MKB2000-2022A';
   const CLIENT_KEYS = [
-    'MT7X-4G2K-9P1L', 'MT3F-8H6D-2R9W', 'MT5Q-1Y7V-4B8N', 'MT9J-6C3X-0M5Z',
-    'MT2A-7S4E-1T6U', 'MT8R-5N2P-9K3H', 'MT4B-0F8G-6L7Y', 'MT1C-9D5W-3V0Q',
-    'MT6E-2H9J-8M4X', 'MT0K-3R7T-5Y1A'
+    'MT7X-4G2K-9P1L','MT3F-8H6D-2R9W','MT5Q-1Y7V-4B8N','MT9J-6C3X-0M5Z',
+    'MT2A-7S4E-1T6U','MT8R-5N2P-9K3H','MT4B-0F8G-6L7Y','MT1C-9D5W-3V0Q',
+    'MT6E-2H9J-8M4X','MT0K-3R7T-5Y1A'
   ];
-  const LICENCE_STORAGE_KEY = 'moment_troc_licence';
-  const USED_KEYS_STORAGE_KEY = 'moment_troc_used_keys';
+  const ALL_KEYS = [MASTER_KEY, ...CLIENT_KEYS];
 
-  const licencePage = document.getElementById('licence-page');
-  const licenceInput = document.getElementById('licence-input');
-  const licenceBtn = document.getElementById('licence-btn');
-  const licenceError = document.getElementById('licence-error');
-  const configPage = document.getElementById('config-page');
+  // Ton Formspree personnel — intégré en dur, invisible
+  const MASTER_FORMSPREE = 'https://formspree.io/f/mlgogblo';
 
-  function showConfigPage() {
-    licencePage.style.display = 'none';
-    configPage.style.display = 'flex';
-  }
-
-  function checkStoredLicence() {
-    const stored = localStorage.getItem(LICENCE_STORAGE_KEY);
-    if (stored) {
-      if (stored === MASTER_KEY) { showConfigPage(); return true; }
-      if (CLIENT_KEYS.includes(stored)) {
-        const used = JSON.parse(localStorage.getItem(USED_KEYS_STORAGE_KEY) || '[]');
-        if (used.includes(stored)) { showConfigPage(); return true; }
-      }
-    }
-    licencePage.style.display = 'flex';
-    configPage.style.display = 'none';
-    return false;
-  }
-
-  function validateLicence(key) {
-    key = key.trim().toUpperCase();
-    if (key === MASTER_KEY) {
-      localStorage.setItem(LICENCE_STORAGE_KEY, key);
-      showConfigPage();
-      return;
-    }
-    if (CLIENT_KEYS.includes(key)) {
-      const used = JSON.parse(localStorage.getItem(USED_KEYS_STORAGE_KEY) || '[]');
-      if (used.includes(key)) {
-        licenceError.textContent = 'Cette clé a déjà été utilisée.';
-        return;
-      }
-      used.push(key);
-      localStorage.setItem(USED_KEYS_STORAGE_KEY, JSON.stringify(used));
-      localStorage.setItem(LICENCE_STORAGE_KEY, key);
-      showConfigPage();
-      return;
-    }
-    licenceError.textContent = 'Clé invalide.';
-  }
-
-  licenceBtn.addEventListener('click', () => {
-    const key = licenceInput.value.trim();
-    if (!key) { licenceError.textContent = 'Veuillez saisir une clé.'; return; }
-    validateLicence(key);
-  });
-  licenceInput.addEventListener('keypress', e => { if (e.key === 'Enter') licenceBtn.click(); });
-
-  checkStoredLicence();
-
-  // ════════════════════════════════════
-  // DONNÉES — QUESTIONS & PROFILS
-  // ════════════════════════════════════
-  const P = {
-    AUTO: 'automatiseur',
-    VAL:  'optimiseur_valeur',
-    PRIX: 'optimiseur_prix',
-    ELE:  'elevateur',
-    LIB:  'liberateur',
-    PROT: 'protecteur'
-  };
-
+  // ════════════════════════════════
+  // LES 8 QUESTIONS
+  // ════════════════════════════════
   const QUESTIONS = [
     {
-      id: 1,
-      texte: "Quand tu découvres quelque chose qui pourrait t'aider, tu fais quoi en premier ?",
+      id: 'q1',
+      text: "Tu vends quoi en ce moment ?",
       options: [
-        { texte: "Je cherche des retours de gens qui l'ont testé.", profil: P.AUTO },
-        { texte: "Je calcule si l'investissement vaut le coup.", profil: P.VAL },
-        { texte: "Je compare les prix pour ne pas payer trop cher.", profil: P.PRIX },
-        { texte: "Je regarde qui l'utilise et si ça correspond à mon image.", profil: P.ELE },
-        { texte: "Je vérifie si c'est adapté à ma situation.", profil: P.LIB },
-        { texte: "Je lis les conditions et cherche ce qui pourrait ne pas marcher.", profil: P.PROT }
+        "Un produit physique (vêtements, cosmétiques, alimentation...)",
+        "Un produit numérique (ebook, formation, template...)",
+        "Un service (coaching, freelance, conseil...)",
+        "Je n'ai pas encore lancé mon offre"
       ]
     },
     {
-      id: 2,
-      texte: "Quel est ton plus grand défi en ce moment ?",
+      id: 'q2',
+      text: "Ton plus grand frein à la vente, c'est quoi ?",
       options: [
-        { texte: "Je ne sais pas par où commencer.", profil: P.AUTO },
-        { texte: "Les résultats ne sont pas proportionnels à mes efforts.", profil: P.VAL },
-        { texte: "Je dépense pour des promesses non tenues.", profil: P.PRIX },
-        { texte: "J'ai du mal à me différencier.", profil: P.ELE },
-        { texte: "Les solutions sont trop génériques pour moi.", profil: P.LIB },
-        { texte: "J'ai du mal à refaire confiance.", profil: P.PROT }
+        "Je ne sais pas comment convaincre les gens",
+        "Les gens regardent mais n'achètent pas",
+        "Je n'arrive pas à toucher les bonnes personnes",
+        "J'ai peur de paraître trop insistant"
       ]
     },
     {
-      id: 3,
-      texte: "Entre deux contenus gratuits, lequel tu ouvres ?",
+      id: 'q3',
+      text: "Comment tu prospectes aujourd'hui ?",
       options: [
-        { texte: "Celui avec un plan clair étape par étape.", profil: P.AUTO },
-        { texte: "Celui avec des résultats chiffrés.", profil: P.VAL },
-        { texte: "Celui qui compare les options disponibles.", profil: P.PRIX },
-        { texte: "Celui qui est bien présenté et professionnel.", profil: P.ELE },
-        { texte: "Celui qui parle exactement de ma situation.", profil: P.LIB },
-        { texte: "Celui qui explique ce qui ne marche pas.", profil: P.PROT }
+        "Facebook / Instagram (posts, stories, DM)",
+        "WhatsApp (groupes, statuts, messages directs)",
+        "Bouche-à-oreille uniquement",
+        "Je ne prospecte pas encore"
       ]
     },
     {
-      id: 4,
-      texte: "Quand tu es satisfait d'un achat, tu dis ?",
+      id: 'q4',
+      text: "En moyenne, combien de personnes te contactent par semaine pour ton offre ?",
       options: [
-        { texte: "C'était simple et ça a marché.", profil: P.AUTO },
-        { texte: "C'est rentable, ça vaut l'investissement.", profil: P.VAL },
-        { texte: "Excellent rapport qualité-prix.", profil: P.PRIX },
-        { texte: "Ça m'a aidé à me positionner.", profil: P.ELE },
-        { texte: "C'était vraiment fait pour moi.", profil: P.LIB },
-        { texte: "Pas de mauvaise surprise, tout était clair.", profil: P.PROT }
+        "0 — personne ne me contacte spontanément",
+        "1 à 5 personnes",
+        "6 à 20 personnes",
+        "Plus de 20 personnes"
       ]
     },
     {
-      id: 5,
-      texte: "Face à une nouvelle opportunité, qu'est-ce qui peut te bloquer ?",
+      id: 'q5',
+      text: "Quand quelqu'un te dit « c'est trop cher », tu fais quoi ?",
       options: [
-        { texte: "Le manque d'accompagnement.", profil: P.AUTO },
-        { texte: "Le doute sur le retour sur investissement.", profil: P.VAL },
-        { texte: "Un prix trop élevé.", profil: P.PRIX },
-        { texte: "Une image qui ne correspond pas à la mienne.", profil: P.ELE },
-        { texte: "Ce n'est pas assez personnalisé.", profil: P.LIB },
-        { texte: "La peur d'être déçu encore.", profil: P.PROT }
+        "Je baisse le prix ou je négocie",
+        "J'essaie de justifier ma valeur mais ça ne marche pas toujours",
+        "Je laisse tomber, ça ne sert à rien d'insister",
+        "J'ai une technique précise pour gérer ça"
       ]
     },
     {
-      id: 6,
-      texte: "Comment tu prends tes décisions importantes ?",
+      id: 'q6',
+      text: "Tu as déjà fait une vente sans que tu aies eu besoin de convaincre ?",
       options: [
-        { texte: "Je cherche quelqu'un qui me montre exactement quoi faire.", profil: P.AUTO },
-        { texte: "Je calcule le gain potentiel avant tout.", profil: P.VAL },
-        { texte: "Je compare plusieurs options et je choisis la plus cohérente.", profil: P.PRIX },
-        { texte: "Je regarde ce que font les gens que j'admire.", profil: P.ELE },
-        { texte: "Je vérifie que ça correspond vraiment à mon cas.", profil: P.LIB },
-        { texte: "Je prends mon temps et j'observe avant de me lancer.", profil: P.PROT }
+        "Jamais — je dois toujours pousser",
+        "Oui, rarement, mais ça arrive",
+        "Oui, souvent — certains achètent presque seuls",
+        "Je ne comprends pas pourquoi certains achètent et d'autres non"
       ]
     },
     {
-      id: 7,
-      texte: "Dans quelle situation te reconnais-tu le plus ?",
+      id: 'q7',
+      text: "Qu'est-ce que tu attends le plus de cet accès ?",
       options: [
-        { texte: "Je veux des résultats rapides sans me perdre dans les détails.", profil: P.AUTO },
-        { texte: "Je suis exigeant sur ce que me rapporte chaque effort.", profil: P.VAL },
-        { texte: "Je fais attention à ne jamais payer plus que ce que ça vaut.", profil: P.PRIX },
-        { texte: "L'image que je projette compte autant que mes résultats.", profil: P.ELE },
-        { texte: "Les solutions toutes faites ne me correspondent jamais.", profil: P.LIB },
-        { texte: "J'ai besoin d'être rassuré avant de me lancer.", profil: P.PROT }
+        "Comprendre pourquoi mes prospects n'achètent pas",
+        "Avoir des phrases et scripts prêts à l'emploi",
+        "Identifier le bon moment pour vendre",
+        "Construire une relation avant de vendre"
       ]
     },
     {
-      id: 8,
-      texte: "Quel est ton niveau de méfiance face aux offres en ligne ?",
+      id: 'q8',
+      text: "Tu es prêt à changer ta façon de vendre si tu vois que ça marche ?",
       options: [
-        { texte: "Faible — je fais confiance facilement.", profil: P.AUTO, mefiance: 1 },
-        { texte: "Modéré — j'ai besoin de preuves concrètes.", profil: P.VAL, mefiance: 2 },
-        { texte: "Élevé — je compare toujours avant de décider.", profil: P.PRIX, mefiance: 3 },
-        { texte: "Élevé — j'ai besoin de garanties.", profil: P.ELE, mefiance: 3 },
-        { texte: "Très élevé — j'analyse tout avant d'agir.", profil: P.LIB, mefiance: 4 },
-        { texte: "Très élevé — j'ai déjà été déçu.", profil: P.PROT, mefiance: 5 }
+        "Oui, totalement — je veux des résultats concrets",
+        "Oui, mais j'ai besoin de comprendre avant d'appliquer",
+        "Peut-être — je suis curieux mais prudent",
+        "Je veux d'abord tester avant de m'engager"
       ]
     }
   ];
 
-  const PROFIL_LABELS = {
-    automatiseur:      "L'Automatiseur",
-    optimiseur_valeur: "L'Optimiseur Valeur",
-    optimiseur_prix:   "L'Optimiseur Prix",
-    elevateur:         "L'Élévateur",
-    liberateur:        "Le Libérateur",
-    protecteur:        "Le Protecteur"
-  };
-
-  // ════════════════════════════════════
+  // ════════════════════════════════
   // ÉTAT GLOBAL
-  // ════════════════════════════════════
-  let currentIndex = 0;
-  let answers = new Array(8).fill(null);
+  // ════════════════════════════════
+  let currentStep = 0; // 0-7 = questions, 8 = final (prénom/email)
+  let answers = {};
   let config = {};
 
-  const formPage = document.getElementById('form-page');
-  const successPage = document.getElementById('success-page');
-  const questionContainer = document.getElementById('question-container');
-  const progressBar = document.getElementById('progress-bar');
+  // ════════════════════════════════
+  // ÉLÉMENTS DOM
+  // ════════════════════════════════
+  const licencePage   = document.getElementById('licence-page');
+  const configPage    = document.getElementById('config-page');
+  const formPage      = document.getElementById('form-page');
+  const successPage   = document.getElementById('success-page');
+
+  const licenceInput  = document.getElementById('licence-input');
+  const licenceBtn    = document.getElementById('licence-btn');
+  const licenceError  = document.getElementById('licence-error');
+
+  const progressBar   = document.getElementById('progress-bar');
   const progressLabel = document.getElementById('progress-label');
+  const qContainer    = document.getElementById('question-container');
 
-  const cfgProduit = document.getElementById('cfg-produit');
-  const cfgBusiness = document.getElementById('cfg-business');
-  const cfgLienLead = document.getElementById('cfg-lien-lead');
-  const cfgLienBoutique = document.getElementById('cfg-lien-boutique');
-  const cfgImage = document.getElementById('cfg-image');
-  const cfgFormspree = document.getElementById('cfg-formspree');
+  // ════════════════════════════════
+  // UTILITAIRES
+  // ════════════════════════════════
+  function show(el) { el.style.display = 'flex'; }
+  function hide(el) { el.style.display = 'none'; }
 
-  const ogTitle = document.getElementById('og-title');
-  const ogDesc = document.getElementById('og-desc');
-  const ogImage = document.getElementById('og-image');
-  const pageTitle = document.getElementById('page-title');
+  function getParam(key) {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(key) ? decodeURIComponent(params.get(key)) : null;
+    } catch(e) { return null; }
+  }
 
-  const successText = document.getElementById('success-text');
-  const successCta = document.getElementById('success-cta');
+  function encodeConfig(cfg) {
+    try { return btoa(unescape(encodeURIComponent(JSON.stringify(cfg)))); }
+    catch(e) { return ''; }
+  }
 
-  // ════════════════════════════════════
-  // FONCTIONS
-  // ════════════════════════════════════
-  window.lancerFormulaire = function() {
-    config.produit = cfgProduit.value.trim() || "Mon offre exclusive";
-    config.business = cfgBusiness.value.trim() || "J'accompagne les entrepreneurs";
-    config.lienLead = cfgLienLead.value.trim() || "#";
-    config.lienBoutique = cfgLienBoutique.value.trim() || "";
-    config.image = cfgImage.value.trim() || "";
-    config.formspree = cfgFormspree.value.trim() || "";
+  function decodeConfig(str) {
+    try { return JSON.parse(decodeURIComponent(escape(atob(str)))); }
+    catch(e) { return null; }
+  }
 
-    const title = config.produit + " | Moment Troc";
-    pageTitle.textContent = title;
-    ogTitle.setAttribute('content', title);
-    ogDesc.setAttribute('content', config.business);
-    if (config.image) ogImage.setAttribute('content', config.image);
+  // ════════════════════════════════
+  // DÉMARRAGE
+  // ════════════════════════════════
+  function init() {
+    const cfgParam = getParam('cfg');
 
-    configPage.style.display = 'none';
-    formPage.style.display = 'block';
-    successPage.style.display = 'none';
-
-    currentIndex = 0;
-    answers = new Array(8).fill(null);
-    renderQuestion();
-  };
-
-  function renderQuestion() {
-    const q = QUESTIONS[currentIndex];
-    const selectedOption = answers[currentIndex];
-
-    const percent = ((currentIndex + 1) / QUESTIONS.length) * 100;
-    progressBar.style.width = percent + '%';
-    progressLabel.textContent = `Question ${currentIndex+1} / ${QUESTIONS.length}`;
-
-    let html = `<div class="question-card">`;
-    html += `<div class="q-counter">Question ${currentIndex+1}</div>`;
-    html += `<div class="q-text">${q.texte}</div>`;
-    html += `<div class="options-list">`;
-
-    q.options.forEach((opt, i) => {
-      const selectedClass = (selectedOption && selectedOption.texte === opt.texte) ? 'selected' : '';
-      html += `<button class="option-btn ${selectedClass}" data-opt-index="${i}">${opt.texte}</button>`;
-    });
-
-    html += `</div><div class="form-nav">`;
-    if (currentIndex > 0) {
-      html += `<button class="nav-back" id="nav-back">← Précédent</button>`;
+    if (cfgParam) {
+      // Mode prospect : décode la config et affiche le formulaire
+      const decoded = decodeConfig(cfgParam);
+      if (decoded) {
+        config = decoded;
+        applyOGTags();
+        hide(licencePage);
+        hide(configPage);
+        show(formPage);
+        renderStep();
+      } else {
+        // Config invalide → page licence
+        show(licencePage);
+      }
     } else {
-      html += `<div></div>`;
-    }
-
-    // Le bouton "Suivant" n'est actif que si une réponse est sélectionnée
-    const nextActiveClass = selectedOption ? 'active' : '';
-    const nextText = (currentIndex === QUESTIONS.length - 1) ? 'Terminer →' : 'Suivant →';
-    html += `<button class="nav-next ${nextActiveClass}" id="nav-next">${nextText}</button>`;
-    html += `</div></div>`;
-
-    questionContainer.innerHTML = html;
-
-    document.querySelectorAll('.option-btn').forEach(btn => {
-      btn.addEventListener('click', onOptionClick);
-    });
-
-    const backBtn = document.getElementById('nav-back');
-    if (backBtn) backBtn.addEventListener('click', goBack);
-
-    const nextBtn = document.getElementById('nav-next');
-    if (nextBtn) nextBtn.addEventListener('click', goNext);
-  }
-
-  function onOptionClick(e) {
-    const btn = e.currentTarget;
-    const index = parseInt(btn.getAttribute('data-opt-index'));
-    const selectedOption = QUESTIONS[currentIndex].options[index];
-    answers[currentIndex] = selectedOption;
-    renderQuestion();
-  }
-
-  function goBack() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      renderQuestion();
+      // Mode entrepreneur : page licence
+      show(licencePage);
     }
   }
 
-  function goNext() {
-    if (!answers[currentIndex]) return;
-    if (currentIndex === QUESTIONS.length - 1) {
-      renderFinalStep();
+  function applyOGTags() {
+    if (config.produit) {
+      document.getElementById('og-title').content = config.produit;
+      document.getElementById('page-title').textContent = config.produit + ' — Moment Troc';
+    }
+    if (config.image) {
+      document.getElementById('og-image').content = config.image;
+    }
+  }
+
+  // ════════════════════════════════
+  // LICENCE
+  // ════════════════════════════════
+  licenceBtn.addEventListener('click', function() {
+    const val = licenceInput.value.trim().toUpperCase();
+    if (ALL_KEYS.includes(val)) {
+      licenceError.textContent = '';
+      hide(licencePage);
+      configPage.style.display = 'flex';
     } else {
-      currentIndex++;
-      renderQuestion();
+      licenceError.textContent = 'Clé invalide. Vérifie et réessaie.';
+      licenceInput.style.borderColor = 'rgba(200,80,80,0.5)';
+      setTimeout(() => { licenceInput.style.borderColor = ''; }, 2000);
     }
-  }
+  });
 
-  function renderFinalStep() {
-    progressBar.style.width = '100%';
-    progressLabel.textContent = 'Finalisation';
+  licenceInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') licenceBtn.click();
+  });
 
-    const html = `
-      <div class="final-card">
-        <div class="final-icon">📬</div>
-        <div class="final-title">Plus qu'une étape</div>
-        <div class="final-sub">Où devons-nous envoyer ton accès ?</div>
-        <input type="email" class="final-input" id="final-email" placeholder="ton@email.com" autofocus>
-        <button class="submit-btn" id="submit-btn" disabled>Recevoir mon accès</button>
-        <div class="privacy-note">Tes infos sont en sécurité. Aucun spam.</div>
-      </div>
-    `;
-    questionContainer.innerHTML = html;
+  // ════════════════════════════════
+  // CONFIG — CHOIX REDIRECTION
+  // ════════════════════════════════
+  let redirectChoice = 'leadmagnet';
 
-    const emailInput = document.getElementById('final-email');
-    const submitBtn = document.getElementById('submit-btn');
+  document.getElementById('opt-leadmagnet').addEventListener('click', function() {
+    redirectChoice = 'leadmagnet';
+    document.getElementById('opt-leadmagnet').classList.add('selected');
+    document.getElementById('opt-boutique').classList.remove('selected');
+    document.getElementById('field-leadmagnet').classList.add('visible');
+    document.getElementById('field-boutique').classList.remove('visible');
+  });
 
-    emailInput.addEventListener('input', () => {
-      submitBtn.disabled = !isValidEmail(emailInput.value);
-    });
+  document.getElementById('opt-boutique').addEventListener('click', function() {
+    redirectChoice = 'boutique';
+    document.getElementById('opt-boutique').classList.add('selected');
+    document.getElementById('opt-leadmagnet').classList.remove('selected');
+    document.getElementById('field-boutique').classList.add('visible');
+    document.getElementById('field-leadmagnet').classList.remove('visible');
+  });
 
-    submitBtn.addEventListener('click', () => {
-      const email = emailInput.value.trim();
-      if (!isValidEmail(email)) return;
-      submitLead(email);
-    });
-  }
+  // ════════════════════════════════
+  // GÉNÉRATION DU LIEN PROSPECT
+  // ════════════════════════════════
+  document.getElementById('generate-link-btn').addEventListener('click', function() {
+    const produit   = document.getElementById('cfg-produit').value.trim();
+    const business  = document.getElementById('cfg-business').value.trim();
+    const image     = document.getElementById('cfg-image').value.trim();
+    const formspree = document.getElementById('cfg-formspree').value.trim();
+    const lienLead  = document.getElementById('cfg-lien-lead').value.trim();
+    const lienBoutique = document.getElementById('cfg-lien-boutique').value.trim();
 
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
+    if (!produit) { alert('Indique le nom de ton produit.'); return; }
+    if (!formspree) { alert('Indique ton email Formspree.'); return; }
 
-  function submitLead(email) {
-    const submitBtn = document.getElementById('submit-btn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours...';
+    const redirectUrl = redirectChoice === 'boutique' ? lienBoutique : lienLead;
+    if (!redirectUrl) {
+      alert('Indique le lien de redirection pour ton prospect.');
+      return;
+    }
 
-    // Calcul du profil majoritaire
-    const counts = {};
-    answers.forEach(ans => { counts[ans.profil] = (counts[ans.profil] || 0) + 1; });
-    const profilMajoritaire = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-    const profilLabel = PROFIL_LABELS[profilMajoritaire] || profilMajoritaire;
-    const mefiance = answers[7].mefiance || 3;
-
-    const payload = {
-      email,
-      profil: profilLabel,
-      mefiance,
-      reponses: answers.map((opt, idx) => ({
-        question: QUESTIONS[idx].texte,
-        reponse: opt.texte
-      })),
-      config
+    const cfg = {
+      produit,
+      business,
+      image,
+      formspree,
+      redirect: redirectUrl,
+      redirectType: redirectChoice
     };
 
-    function sendToFormspree(endpoint, data) {
-      if (!endpoint) return Promise.resolve();
-      return fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      }).catch(err => console.warn('Erreur Formspree', err));
+    const encoded = encodeConfig(cfg);
+    const baseUrl = window.location.href.split('?')[0];
+    const link = baseUrl + '?cfg=' + encoded;
+
+    document.getElementById('generated-link-input').value = link;
+    document.getElementById('generated-link-box').style.display = 'block';
+  });
+
+  document.getElementById('copy-link-btn').addEventListener('click', function() {
+    const input = document.getElementById('generated-link-input');
+    input.select();
+    input.setSelectionRange(0, 99999);
+    try {
+      navigator.clipboard.writeText(input.value).then(function() {
+        document.getElementById('copy-link-btn').textContent = '✓ Copié !';
+        setTimeout(() => { document.getElementById('copy-link-btn').textContent = '📋 Copier le lien'; }, 2000);
+      });
+    } catch(e) {
+      document.execCommand('copy');
+      document.getElementById('copy-link-btn').textContent = '✓ Copié !';
+      setTimeout(() => { document.getElementById('copy-link-btn').textContent = '📋 Copier le lien'; }, 2000);
     }
+  });
 
-    const OWNER_FORMSPREE = 'https://formspree.io/f/mlgogblo';
-    const promises = [];
-    if (config.formspree) promises.push(sendToFormspree(config.formspree, payload));
-    promises.push(sendToFormspree(OWNER_FORMSPREE, payload));
+  // ════════════════════════════════
+  // FORMULAIRE PROSPECT
+  // ════════════════════════════════
+  function updateProgress() {
+    const total = QUESTIONS.length + 1; // 8 questions + étape finale
+    const done  = currentStep + 1;
+    const pct   = Math.round((done / total) * 100);
+    progressBar.style.width = pct + '%';
 
-    Promise.all(promises).finally(() => {
-      formPage.style.display = 'none';
-      successPage.style.display = 'flex';
-      successText.innerHTML = 'Ton accès est en route.<br>Vérifie ta boîte mail dans quelques minutes.';
-      successCta.href = config.lienLead || '#';
+    if (currentStep < QUESTIONS.length) {
+      progressLabel.textContent = 'Question ' + done + ' / ' + QUESTIONS.length;
+    } else {
+      progressLabel.textContent = 'Dernière étape';
+    }
+  }
+
+  function renderStep() {
+    updateProgress();
+
+    if (currentStep < QUESTIONS.length) {
+      renderQuestion(QUESTIONS[currentStep]);
+    } else {
+      renderFinal();
+    }
+  }
+
+  function renderQuestion(q) {
+    const savedAnswer = answers[q.id] || null;
+
+    let optionsHTML = q.options.map(function(opt, i) {
+      const sel = savedAnswer === opt ? 'selected' : '';
+      return '<button class="option-btn ' + sel + '" data-value="' + escapeAttr(opt) + '">' + escapeHTML(opt) + '</button>';
+    }).join('');
+
+    const isFirst = currentStep === 0;
+    const hasAnswer = savedAnswer !== null;
+
+    qContainer.innerHTML =
+      '<div class="question-card">' +
+        '<div class="q-counter">Question ' + (currentStep + 1) + ' sur ' + QUESTIONS.length + '</div>' +
+        '<div class="q-text">' + escapeHTML(q.text) + '</div>' +
+        '<div class="options-list">' + optionsHTML + '</div>' +
+        '<div class="form-nav">' +
+          '<button class="nav-back" id="btn-back" ' + (isFirst ? 'style="visibility:hidden"' : '') + '>← Retour</button>' +
+          '<button class="nav-next ' + (hasAnswer ? 'active' : '') + '" id="btn-next">Suivant →</button>' +
+        '</div>' +
+      '</div>';
+
+    // Listeners options
+    qContainer.querySelectorAll('.option-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        qContainer.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        answers[q.id] = btn.getAttribute('data-value');
+        document.getElementById('btn-next').classList.add('active');
+      });
+    });
+
+    // Retour
+    document.getElementById('btn-back').addEventListener('click', function() {
+      if (currentStep > 0) { currentStep--; renderStep(); }
+    });
+
+    // Suivant
+    document.getElementById('btn-next').addEventListener('click', function() {
+      if (!answers[q.id]) return;
+      currentStep++;
+      renderStep();
     });
   }
+
+  function renderFinal() {
+    qContainer.innerHTML =
+      '<div class="final-card">' +
+        '<div class="final-icon">✦</div>' +
+        '<div class="final-title">Presque là.</div>' +
+        '<div class="final-sub">Laisse ton prénom et ton email<br>pour recevoir ton accès personnalisé.</div>' +
+        '<input type="text" class="final-input" id="final-prenom" placeholder="Ton prénom">' +
+        '<input type="email" class="final-input" id="final-email" placeholder="Ton email">' +
+        '<button class="submit-btn" id="submit-btn">Recevoir mon accès →</button>' +
+        '<div class="privacy-note">🔒 Tes infos restent confidentielles. Pas de spam.</div>' +
+        '<div class="form-nav" style="margin-top:16px;">' +
+          '<button class="nav-back" id="btn-back-final">← Retour</button>' +
+          '<span></span>' +
+        '</div>' +
+      '</div>';
+
+    document.getElementById('btn-back-final').addEventListener('click', function() {
+      currentStep--;
+      renderStep();
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+      const prenom = document.getElementById('final-prenom').value.trim();
+      const email  = document.getElementById('final-email').value.trim();
+
+      if (!prenom) { document.getElementById('final-prenom').focus(); return; }
+      if (!email || !email.includes('@')) { document.getElementById('final-email').focus(); return; }
+
+      submitForm(prenom, email);
+    });
+  }
+
+  // ════════════════════════════════
+  // SOUMISSION — DOUBLE ENVOI
+  // ════════════════════════════════
+  function buildPayload(prenom, email) {
+    const payload = {
+      prenom: prenom,
+      email:  email,
+      produit: config.produit || '',
+      business: config.business || '',
+      redirectType: config.redirectType || '',
+      source: window.location.href
+    };
+    QUESTIONS.forEach(function(q, i) {
+      payload['q' + (i + 1) + '_' + q.id] = answers[q.id] || '';
+    });
+    return payload;
+  }
+
+  async function submitToFormspree(url, data) {
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      return res.ok;
+    } catch(e) {
+      return false;
+    }
+  }
+
+  async function submitForm(prenom, email) {
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours...';
+
+    const payload = buildPayload(prenom, email);
+
+    // Envoi simultané vers ton Formspree ET celui de l'entrepreneur
+    const sends = [submitToFormspree(MASTER_FORMSPREE, payload)];
+
+    if (config.formspree && config.formspree !== MASTER_FORMSPREE) {
+      // Formspree de l'entrepreneur — on adapte l'URL si c'est un email ou une URL complète
+      let entrepreneurUrl = config.formspree;
+      if (!entrepreneurUrl.startsWith('http')) {
+        entrepreneurUrl = 'https://formspree.io/f/' + entrepreneurUrl;
+      }
+      sends.push(submitToFormspree(entrepreneurUrl, payload));
+    }
+
+    await Promise.all(sends);
+
+    // Affichage succès
+    hide(formPage);
+    show(successPage);
+
+    document.getElementById('success-text').innerHTML =
+      'Merci <strong>' + escapeHTML(prenom) + '</strong> !<br>' +
+      'Ton accès est prêt. Clique ci-dessous.';
+
+    const ctaLink = document.getElementById('success-cta');
+    if (config.redirect) {
+      ctaLink.href = config.redirect;
+      ctaLink.textContent = config.redirectType === 'boutique'
+        ? 'Accéder à la boutique →'
+        : 'Télécharger maintenant →';
+    } else {
+      ctaLink.style.display = 'none';
+    }
+  }
+
+  // ════════════════════════════════
+  // UTILITAIRES SÉCURITÉ
+  // ════════════════════════════════
+  function escapeHTML(str) {
+    return String(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  function escapeAttr(str) {
+    return String(str).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  // ════════════════════════════════
+  // LANCEMENT
+  // ════════════════════════════════
+  init();
 
 })();
 </script>
-
 </body>
 </html>
